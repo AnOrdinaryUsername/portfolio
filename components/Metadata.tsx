@@ -1,26 +1,52 @@
 import Head from 'next/head';
 
 interface MetadataProps {
-  title: string;
-  metaDescription: string;
+  title?: string;
+  metaDescription?: string;
+  image?: {
+    alt: string;
+    path: string;
+    width: string;
+    height: string;
+  };
 }
 
-function Metadata({ title, metaDescription }: MetadataProps) {
+function Metadata({ title, metaDescription, image }: MetadataProps) {
+  const defaults = {
+    title: 'Kyle Masa',
+    metaDescription: 'A front-end developer that loves to make things pretty.',
+    image: {
+      alt: 'Logo for portfolio',
+      path: '/images/logo.png',
+      width: '278',
+      height: '241',
+    },
+  };
+
+  const pageTitle = title || defaults.title;
+  const description = metaDescription || defaults.metaDescription;
+  const siteImage = {
+    alt: image?.alt || defaults.image.alt,
+    path: image?.path || defaults.image.path,
+    width: image?.width || defaults.image.width,
+    height: image?.height || defaults.image.height,
+  };
+
   return (
     <Head>
-      <title>{title}</title>
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={metaDescription} />
+      <title>{pageTitle}</title>
+      <meta name="description" content="" />
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-      <link rel="manifest" href="/favicon/site.webmanifest" />
-      <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#2e3440" />
-      <link rel="shortcut icon" href="/favicon/favicon.ico" />
-      <meta name="msapplication-TileColor" content="#2b5797" />
-      <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-      <meta name="theme-color" content="#2e3440" />
+      <meta property="og:image" content={siteImage.path} />
+      <meta property="og:image:alt" content={siteImage.alt} />
+      <meta property="og:image:width" content={siteImage.width} />
+      <meta property="og:image:height" content={siteImage.height} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={pageTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={siteImage.path} />
     </Head>
   );
 }

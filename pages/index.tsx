@@ -10,11 +10,7 @@ interface HomeProps {
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Metadata
-        title="Kyle Masa"
-        metaDescription="A front-end developer that loves to make things pretty."
-      />
-
+      <Metadata />
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
