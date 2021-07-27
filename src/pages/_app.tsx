@@ -127,7 +127,7 @@ const GlobalStyles = createGlobalStyle`
     body {
         display: flex;
         flex: 1;
-        flex-flow: column nowrap;
+        flex-direction: column;
         font: 16px/1.65 Rubik, system-ui, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
             Helvetica Neue, sans-serif;
         font-size: 1.6em;
@@ -149,7 +149,9 @@ const GlobalStyles = createGlobalStyle`
 
     code {
         font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-        padding: 0 0.3rem;
+        background-color: var(--bg-tertiary);
+        border-radius: 6px;
+        padding: 0 0.8rem;
     }
 
     em {
@@ -167,22 +169,12 @@ const GlobalStyles = createGlobalStyle`
     }
 
     header {
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: baseline;
-        justify-content: space-between;
         width: 100%;
         max-width: 110rem;
         margin: auto;
-        padding: 2rem 3.2rem;
-
-        @media ${(p) => p.theme.breakpoints.med} {
-            flex-direction: row;
-        }
     }
 
     main {
-        flex: 1;
         overflow: hidden;
     }
 
@@ -194,10 +186,8 @@ const GlobalStyles = createGlobalStyle`
         font-weight: bold;
     }
 
-    #root {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
+    #__next {
+        flex: 1;
     }
 `;
 
