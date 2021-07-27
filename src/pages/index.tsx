@@ -1,10 +1,5 @@
+import Metadata from 'components/Metadata';
 import styled from 'styled-components';
-import Metadata from '../components/Metadata';
-
-interface HomeProps {
-  title: string;
-  metaDescription: string;
-}
 
 export default function Home() {
   return (
