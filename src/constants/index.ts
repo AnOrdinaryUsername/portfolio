@@ -20,7 +20,7 @@ export const BREAKPOINTS = {
  * Colors from Nord theme
  * https://www.nordtheme.com/docs/colors-and-palettes
  */
-const NORD_THEME = {
+export const NORD_THEME = {
   nord0: '#2E3440',
   nord1: '#3B4252',
   nord2: '#434C5E',
@@ -84,6 +84,30 @@ export const COLORS = {
   green: {
     light: 'hsl(115, 20%, 52%)',
     dark: NORD_THEME.nord14,
+  },
+  'primary-button-bg': {
+    light: NORD_THEME.nord10,
+    dark: NORD_THEME.nord7,
+  },
+  'primary-button-fg': {
+    light: 'hsl(0, 0%, 100%)',
+    dark: NORD_THEME.nord0,
+  },
+  'secondary-button-fg': {
+    light: NORD_THEME.nord10,
+    dark: NORD_THEME.nord6,
+  },
+  'secondary-button-border': {
+    light: NORD_THEME.nord9,
+    dark: NORD_THEME.nord4,
+  },
+  'tertiary-button-fg': {
+    light: NORD_THEME.nord10,
+    dark: NORD_THEME.nord4,
+  },
+  'hollow-dots-opacity': {
+    light: '0.2',
+    dark: '0.8',
   },
 };
 
