@@ -2,4 +2,4 @@
 
 # portfolio (WIP)
 
-Scuffed ![Figma prototype](https://www.figma.com/file/FbZZeaRJHgMgIIGPu2jY4I/Portfolio-OOOO?node-id=283%3A517)
+Scuffed [Figma prototype](https://www.figma.com/file/FbZZeaRJHgMgIIGPu2jY4I/Portfolio-OOOO?node-id=283%3A517)
