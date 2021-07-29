@@ -131,7 +131,8 @@ const GlobalStyles = createGlobalStyle`
         font: 16px/1.65 Rubik, system-ui, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
             Helvetica Neue, sans-serif;
         font-size: 1.6em;
-        line-height: 1.65;
+        line-height: 1.6;
+        overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
@@ -168,7 +169,7 @@ const GlobalStyles = createGlobalStyle`
         line-height: 1.2;
     }
 
-    header {
+    header, section {
         width: 100%;
         max-width: 110rem;
         margin: auto;
@@ -188,6 +189,17 @@ const GlobalStyles = createGlobalStyle`
 
     #__next {
         flex: 1;
+        padding: 3.2rem;
+
+        @media ${(p) => p.theme.breakpoints.sm} {
+            padding-left: 9.6rem;
+            padding-right: 9.6rem;
+        }
+
+        @media ${(p) => p.theme.breakpoints.med} {
+            padding-left: 6.4rem;
+            padding-right: 6.4rem;
+        }
     }
 `;
 
