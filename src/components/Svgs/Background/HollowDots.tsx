@@ -1,10 +1,7 @@
-import { NORD_THEME } from '../../constants';
+import { CustomSvgProps } from 'components/Svgs/shared';
+import { NORD_THEME } from '../../../constants';
 
-interface BackgroundSvgProps {
-  className?: string;
-}
-
-function HollowDots({ className }: BackgroundSvgProps) {
+function HollowDots({ className }: CustomSvgProps) {
   return (
     <svg
       className={className}
