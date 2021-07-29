@@ -109,6 +109,18 @@ export const COLORS = {
     light: '0.2',
     dark: '0.8',
   },
+  'staircase-opacity': {
+    light: '0.6',
+    dark: '0.4',
+  },
+  'list-opacity': {
+    light: '0.5',
+    dark: '0.4',
+  },
+  'list-fg': {
+    light: NORD_THEME.nord3,
+    dark: NORD_THEME.nord4,
+  },
 };
 
 export const THEME: DefaultTheme = {
