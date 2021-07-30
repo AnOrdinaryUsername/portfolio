@@ -24,7 +24,9 @@ function Hero() {
             <TertiaryButton>View more projects</TertiaryButton>
           </ButtonWrapper>
         </Introduction>
-        <Image src={heroImage} alt="" />
+        <ImageWrapper>
+          <Image src={heroImage} alt="" />
+        </ImageWrapper>
       </Header>
     </>
   );
@@ -35,7 +37,13 @@ const Header = styled.header`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-height: 70rem;
   height: 100vh;
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    min-height: 60rem;
+    max-height: 80rem;
+  }
 
   @media ${(p) => p.theme.breakpoints.med} {
     align-items: flex-start;
@@ -115,20 +123,25 @@ const Description = styled.p`
 
 const ButtonWrapper = styled.div`
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 1.2rem;
+  grid-template-columns: max-content max-content;
+  grid-template-rows: none;
+  justify-items: start;
 
   @media ${(p) => p.theme.breakpoints.sm} {
-    display: grid;
-    grid-template-columns: max-content max-content;
-    grid-template-rows: none;
-    justify-items: start;
     gap: 1.2rem;
   }
 `;
 
 const JobTitle = styled.span`
   color: var(--accent-tertiary);
+`;
+
+const ImageWrapper = styled.div`
+  display: none;
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    display: block;
+  }
 `;
 
 export default Hero;

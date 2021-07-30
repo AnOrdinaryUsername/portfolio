@@ -53,6 +53,7 @@ const DonoWall = styled.div`
 
   @media ${(p) => p.theme.breakpoints.lg} {
     max-width: 50rem;
+    padding-bottom: 0;
     margin-right: 9.6rem;
   }
 `;
