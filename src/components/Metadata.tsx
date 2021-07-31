@@ -23,13 +23,13 @@ function Metadata({ title, metaDescription, image }: MetadataProps) {
     },
   };
 
-  const pageTitle = title || defaults.title;
-  const description = metaDescription || defaults.metaDescription;
+  const pageTitle = title ?? defaults.title;
+  const description = metaDescription ?? defaults.metaDescription;
   const siteImage = {
-    alt: image?.alt || defaults.image.alt,
-    path: image?.path || defaults.image.path,
-    width: image?.width || defaults.image.width,
-    height: image?.height || defaults.image.height,
+    alt: image?.alt ?? defaults.image.alt,
+    path: image?.path ?? defaults.image.path,
+    width: image?.width ?? defaults.image.width,
+    height: image?.height ?? defaults.image.height,
   };
 
   return (
