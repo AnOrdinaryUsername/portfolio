@@ -6,8 +6,10 @@ function Home() {
   return (
     <>
       <Metadata />
-      <Hero />
-      <AboutMe />
+      <main>
+        <Hero />
+        <AboutMe />
+      </main>
     </>
   );
 }

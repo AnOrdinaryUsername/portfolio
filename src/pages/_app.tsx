@@ -1,3 +1,4 @@
+import Navigation from 'components/Navigation/Navigation';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={THEME}>
         <GlobalStyles />
+        <Navigation />
         <Component {...pageProps} />
       </ThemeProvider>
     </>
@@ -117,6 +119,7 @@ const GlobalStyles = createGlobalStyle`
         display: flex;
         font-size: 62.5%;
         min-height: 100%;
+        transition: color 300ms, background-color 300ms;
     }
 
     a {
@@ -176,7 +179,11 @@ const GlobalStyles = createGlobalStyle`
     }
 
     main {
-        overflow: hidden;
+        height: 100%;
+
+        @media (min-width: 576px) and (max-width: 992px) {
+            padding: 9.6rem 0;
+        }
     }
 
     small {

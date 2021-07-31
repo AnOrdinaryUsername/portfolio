@@ -38,7 +38,7 @@ const Header = styled.header`
   align-items: center;
   justify-content: center;
   max-height: 70rem;
-  height: 100vh;
+  height: 90vh;
 
   @media ${(p) => p.theme.breakpoints.sm} {
     min-height: 60rem;
