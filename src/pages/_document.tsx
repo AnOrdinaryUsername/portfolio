@@ -25,10 +25,16 @@ class MyDocument extends Document {
 
 function setColorsByTheme() {
   const colors = '🌈';
+  let colorMode: string;
+  const hasColorModePreference = window.localStorage.getItem('color-mode') ?? 'dark';
 
-  const mql = window.matchMedia('(prefers-color-scheme: dark)');
-  const prefersDarkFromMQ = mql.matches;
-  const colorMode = prefersDarkFromMQ ? 'dark' : 'light';
+  if (hasColorModePreference) {
+    colorMode = hasColorModePreference;
+  } else {
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    const prefersDarkFromMQ = mql.matches;
+    colorMode = prefersDarkFromMQ ? 'dark' : 'light';
+  }
 
   const root = document.documentElement;
 

@@ -35,8 +35,15 @@ export const NORD_THEME = {
   nord14: '#A3BE8C',
 };
 
+export interface ColorMode {
+  [colorName: string]: {
+    light: string;
+    dark: string;
+  };
+}
+
 // TODO: Make a sensible light theme
-export const COLORS = {
+export const COLORS: ColorMode = {
   'bg-primary': {
     light: 'hsl(210, 25%, 97%)',
     dark: NORD_THEME.nord0,
