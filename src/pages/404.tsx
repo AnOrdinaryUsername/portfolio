@@ -23,14 +23,17 @@ function NotFound() {
 const Header = styled.header`
   display: grid;
   place-content: center;
-  padding: 2rem 3.2rem;
-  height: 100%;
+  height: 90%;
   text-align: center;
 `;
 
 const StatusCode = styled.h1`
-  font-size: 6.4rem;
+  font-size: 3.6rem;
   font-weight: 700;
+
+  @media ${(p) => p.theme.breakpoints.med} {
+    font-size: 6.4rem;
+  }
 `;
 
 const Number = styled.span`
@@ -44,9 +47,13 @@ const Message = styled.span`
 const Description = styled.p`
   max-width: 65ch;
   font-weight: 400;
-  font-size: 3.2rem;
+  font-size: 2rem;
   line-height: 1.4;
   padding-top: 1.6rem;
+
+  @media ${(p) => p.theme.breakpoints.med} {
+    font-size: 3.2rem;
+  }
 `;
 
 export default NotFound;
