@@ -72,7 +72,7 @@ const Heading = styled.h1`
 const Description = styled.p`
   font-size: 1.6rem;
   line-height: 1.4;
-  color: var(--fg-primary);
+  color: var(--fg-tertiary);
   padding-bottom: 2.8rem;
 
   @media ${(p) => p.theme.breakpoints.med} {

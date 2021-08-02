@@ -2,6 +2,7 @@ import { Moon, Sun } from 'components/Svgs/Icons';
 import * as React from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../../constants';
+import { Wrapper as DesktopNavWrapper } from './DesktopNav';
 
 function changeColorMode(currentMode: 'dark' | 'light') {
   const root = document.documentElement;
@@ -51,12 +52,15 @@ function DarkModeButton() {
 
 const Button = styled.button`
   line-height: 0;
-  margin-left: 3.2rem;
   padding: 0.8rem 1.2rem;
   border-radius: 6px;
 
   &:hover {
     background-color: var(--bg-secondary);
+  }
+
+  ${DesktopNavWrapper} & {
+    margin-left: 3.2rem;
   }
 `;
 

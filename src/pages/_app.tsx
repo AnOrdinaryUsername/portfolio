@@ -1,10 +1,23 @@
-import Navigation from 'components/Navigation/Navigation';
+import DesktopNav from 'components/Navigation/DesktopNav';
+import MobileNav from 'components/Navigation/MobileNav';
+import { useToggle, useWindowSize } from 'hooks';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import * as React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { THEME } from '../constants';
+import { BREAKPOINT_SIZES, THEME } from '../constants';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isMobileNavOpen, setIsMobileNavOpen] = useToggle();
+  const { width } = useWindowSize();
+  const isSmallerThanDesktop = width < BREAKPOINT_SIZES.med;
+
+  React.useEffect(() => {
+    if (isMobileNavOpen) {
+      window.scrollTo(0, 0);
+    }
+  }, [isMobileNavOpen]);
+
   return (
     <>
       <Head>
@@ -22,15 +35,22 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#2e3440" />
       </Head>
       <ThemeProvider theme={THEME}>
-        <GlobalStyles />
-        <Navigation />
+        <GlobalStyles isMobileNavOpen={isMobileNavOpen} />
+        <DesktopNav toggleMenu={setIsMobileNavOpen} isSmallerThanDesktop={isSmallerThanDesktop} />
         <Component {...pageProps} />
+        {isSmallerThanDesktop && (
+          <MobileNav toggleMenu={setIsMobileNavOpen} isActive={isMobileNavOpen} />
+        )}
       </ThemeProvider>
     </>
   );
 }
 
-const GlobalStyles = createGlobalStyle`
+interface GlobalStylesProps {
+  isMobileNavOpen: boolean;
+}
+
+const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
     /* http://meyerweb.com/eric/tools/css/reset/ 
     v2.0 | 20110126
     License: none (public domain)
@@ -138,6 +158,8 @@ const GlobalStyles = createGlobalStyle`
         overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
+        overflow: ${(p) => (p.isMobileNavOpen ? 'hidden' : 'none')};
     }
 
     button {

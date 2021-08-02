@@ -128,6 +128,14 @@ export const COLORS: ColorMode = {
     light: NORD_THEME.nord3,
     dark: NORD_THEME.nord4,
   },
+  'mobile-nav-bg': {
+    light: 'hsl(220, 27%, 98%)',
+    dark: 'hsl(221, 16%, 19%)',
+  },
+  'mobile-nav-shadow': {
+    light: 'hsl(0, 0%, 0%, 0.1)',
+    dark: 'hsl(219, 17%, 32%, 0.1)',
+  },
 };
 
 export const THEME: DefaultTheme = {
