@@ -1,7 +1,7 @@
 import { Close } from 'components/Svgs/Icons';
 import dynamic from 'next/dynamic';
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import links from './links';
 import NavItem from './NavItem';
 
@@ -48,11 +48,15 @@ export const Wrapper = styled.div<MobileNavProps>`
   font-size: 2.4rem;
   background: var(--mobile-nav-bg);
   box-shadow: -2px 0 1px var(--mobile-nav-shadow);
-  transition: ${(p) =>
-    p.isActive
-      ? 'transform 300ms cubic-bezier(0.4, 0.0, 0.2, 1)'
-      : 'transform 250ms cubic-bezier(0.4, 0.0, 1, 1)'};
-  transform: ${(p) => (p.isActive ? 'translatex(0)' : 'translateX(100%)')};
+  transition: transform 250ms cubic-bezier(0.4, 0, 1, 1);
+  transform: translateX(100%);
+
+  ${(p) =>
+    p.isActive &&
+    css`
+      transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(0);
+    `};
 `;
 
 const Overlay = styled.div<MobileNavProps>`

@@ -162,6 +162,21 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
         overflow: ${(p) => (p.isMobileNavOpen ? 'hidden' : 'none')};
     }
 
+    body::-webkit-scrollbar {
+        background-color: var(--bg-secondary);
+        width: 1.6rem;
+    }
+
+    body::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 3px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: var(--accent-tertiary);
+        border-radius: 6px;
+    }
+
     button {
         appearance: none;
         background-color: inherit;
