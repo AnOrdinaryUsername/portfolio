@@ -1,4 +1,5 @@
 import { Moon, Sun } from 'components/Svgs/Icons';
+import { useToggle } from 'hooks';
 import * as React from 'react';
 import styled from 'styled-components';
 import { COLORS } from '../../constants';
@@ -29,11 +30,7 @@ function changeColorMode(currentMode: 'dark' | 'light') {
 function DarkModeButton() {
   const initialTheme = window.localStorage.getItem('color-mode') ?? 'dark';
   const mode = initialTheme === 'dark' ? true : false;
-  const [isDarkMode, setIsDarkMode] = React.useState<boolean>(mode);
-
-  const updateColorMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  const [isDarkMode, setIsDarkMode] = useToggle(mode);
 
   React.useEffect(() => {
     const theme = isDarkMode ? 'light' : 'dark';
@@ -42,7 +39,7 @@ function DarkModeButton() {
 
   return (
     <Button
-      onClick={updateColorMode}
+      onClick={setIsDarkMode}
       aria-label={isDarkMode ? 'Activate light mode' : 'Activate dark mode'}
     >
       {isDarkMode ? <Sun /> : <Moon />}

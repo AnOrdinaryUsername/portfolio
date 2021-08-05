@@ -39,17 +39,34 @@ function DesktopNav({ toggleMenu, isSmallerThanDesktop }: DesktopNavProps) {
   const nav = isSmallerThanDesktop ? smallNav : desktopNav;
 
   return (
-    <Header>
-      <Link href="/" passHref={true}>
-        <LogoAnchor>
-          <VisuallyHidden text="Homepage" />
-          <Logo height={logoHeight} />
-        </LogoAnchor>
-      </Link>
-      {nav}
-    </Header>
+    <HeaderWrapper>
+      <Header>
+        <Link href="/" passHref={true}>
+          <LogoAnchor>
+            <VisuallyHidden text="Homepage" />
+            <Logo height={logoHeight} />
+          </LogoAnchor>
+        </Link>
+        {nav}
+      </Header>
+    </HeaderWrapper>
   );
 }
+
+const HeaderWrapper = styled.div`
+  padding: 3.2rem;
+  padding-bottom: 0;
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    padding-left: 9.6rem;
+    padding-right: 9.6rem;
+  }
+
+  @media ${(p) => p.theme.breakpoints.med} {
+    padding-left: 6.4rem;
+    padding-right: 6.4rem;
+  }
+`;
 
 const Header = styled.header`
   display: flex;

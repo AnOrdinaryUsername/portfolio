@@ -62,7 +62,7 @@ export const Wrapper = styled.div<MobileNavProps>`
 const Overlay = styled.div<MobileNavProps>`
   height: 100%;
   width: 100%;
-  backdrop-filter: ${(p) => (p.isActive ? 'blur(8px)' : 'none')};
+  backdrop-filter: ${(p) => p.isActive && 'blur(8px)'};
   position: absolute;
   top: 0;
   left: 0;

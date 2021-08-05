@@ -1,8 +1,6 @@
-interface MenuProps {
-  height?: string;
-}
+import { CustomSvgProps } from 'components/Svgs/shared';
 
-function Menu({ height }: MenuProps) {
+function Menu({ height }: CustomSvgProps) {
   const DEFAULT_HEIGHT = '24';
 
   return (

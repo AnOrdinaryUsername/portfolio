@@ -1,8 +1,6 @@
-interface CloseProps {
-  height?: string;
-}
+import { CustomSvgProps } from 'components/Svgs/shared';
 
-function Close({ height }: CloseProps) {
+function Close({ height }: CustomSvgProps) {
   const DEFAULT_HEIGHT = '24';
   return (
     <svg

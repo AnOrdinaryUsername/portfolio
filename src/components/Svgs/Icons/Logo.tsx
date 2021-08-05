@@ -1,8 +1,6 @@
-interface LogoProps {
-  height?: string;
-}
+import { CustomSvgProps } from 'components/Svgs/shared';
 
-function Logo({ height }: LogoProps) {
+function Logo({ height }: CustomSvgProps) {
   const DEFAULT_HEIGHT = '96';
 
   return (
