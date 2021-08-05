@@ -85,7 +85,7 @@ export const COLORS: ColorMode = {
     dark: NORD_THEME.nord9,
   },
   'accent-quaternary': {
-    light: '',
+    light: NORD_THEME.nord10,
     dark: NORD_THEME.nord10,
   },
   green: {
