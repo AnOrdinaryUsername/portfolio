@@ -152,7 +152,7 @@ const Aside = styled.aside`
 const SpeechBubble = styled.div`
   position: absolute;
   top: 17%;
-  left: 15%;
+  left: 12%;
 
   @media ${(p) => p.theme.breakpoints.sm} {
     left: 10%;
@@ -161,7 +161,7 @@ const SpeechBubble = styled.div`
 
 const BobSays = styled.p`
   font-size: 2rem;
-  max-width: 21rem;
+  max-width: 23rem;
   font-weight: 600;
   text-align: center;
   line-height: 1.2;
