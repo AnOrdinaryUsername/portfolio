@@ -1,3 +1,3 @@
-export { default as PrimaryButton } from './PrimaryButton';
-export { default as SecondaryButton } from './SecondaryButton';
-export { default as TertiaryButton } from './TertiaryButton';
+export { default as PrimaryButton, primaryButtonStyles } from './PrimaryButton';
+export { default as SecondaryButton, secondaryButtonStyles } from './SecondaryButton';
+export { default as TertiaryButton, tertiaryButtonStyles } from './TertiaryButton';

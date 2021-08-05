@@ -2,7 +2,7 @@ import * as React from 'react';
 import { css } from 'styled-components';
 
 export interface ButtonProps {
-  children: React.ReactChildren | string;
+  children: React.ReactNode | string;
   size?: 'sm' | 'md' | 'lg';
 }
 

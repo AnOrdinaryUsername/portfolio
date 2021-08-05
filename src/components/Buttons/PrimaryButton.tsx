@@ -1,16 +1,20 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ButtonProps, sharedButtonStyles } from './shared';
 
 function PrimaryButton({ children, size = 'md' }: ButtonProps) {
   return <Primary>{children}</Primary>;
 }
 
-const Primary = styled.button`
-  ${sharedButtonStyles}
+export const primaryButtonStyles = css`
   background-color: var(--primary-button-bg);
   color: var(--primary-button-fg);
   padding: 1.5rem 2rem;
+`;
+
+const Primary = styled.button`
+  ${sharedButtonStyles}
+  ${primaryButtonStyles}
 `;
 
 export default PrimaryButton;
