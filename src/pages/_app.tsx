@@ -1,3 +1,4 @@
+import Footer from 'components/Footer';
 import DesktopNav from 'components/Navigation/DesktopNav';
 import MobileNav from 'components/Navigation/MobileNav';
 import { useToggle, useWindowSize } from 'hooks';
@@ -38,6 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GlobalStyles isMobileNavOpen={isMobileNavOpen} />
         <DesktopNav toggleMenu={setIsMobileNavOpen} isSmallerThanDesktop={isSmallerThanDesktop} />
         <Component {...pageProps} />
+        <Footer />
         {isSmallerThanDesktop && (
           <MobileNav toggleMenu={setIsMobileNavOpen} isActive={isMobileNavOpen} />
         )}
@@ -159,7 +161,7 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
 
-        overflow: ${(p) => (p.isMobileNavOpen ? 'hidden' : 'none')};
+        overflow: ${(p) => p.isMobileNavOpen && 'hidden'};
     }
 
     body::-webkit-scrollbar {
@@ -209,17 +211,40 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
         line-height: 1.2;
     }
 
+    h2 {
+        font-size: 3.2rem;
+        font-weight: 700;
+
+        @media ${(p) => p.theme.breakpoints.med} {
+            font-size: 4.8rem;
+        }
+    }
+
     header, section {
         width: 100%;
         max-width: 110rem;
-        margin: auto;
+        margin: 0 auto;
     }
 
     main {
+        display: flex;
+        flex-direction: column;
         height: 100%;
+        padding-left: 3.2rem;
+        padding-right: 3.2rem;
+
+        @media ${(p) => p.theme.breakpoints.sm} {
+            padding-left: 9.6rem;
+            padding-right: 9.6rem;
+        }
+
+        @media ${(p) => p.theme.breakpoints.med} {
+            padding-left: 6.4rem;
+            padding-right: 6.4rem;
+        }
 
         @media (min-width: 576px) and (max-width: 992px) {
-            padding: 9.6rem 0;
+            padding-top: 9.6rem;
         }
     }
 
@@ -233,17 +258,6 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
 
     #__next {
         flex: 1;
-        padding: 3.2rem;
-
-        @media ${(p) => p.theme.breakpoints.sm} {
-            padding-left: 9.6rem;
-            padding-right: 9.6rem;
-        }
-
-        @media ${(p) => p.theme.breakpoints.med} {
-            padding-left: 6.4rem;
-            padding-right: 6.4rem;
-        }
     }
 `;
 

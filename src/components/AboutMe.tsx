@@ -58,15 +58,9 @@ const DonoWall = styled.div`
   }
 `;
 
-const Heading = styled.h1`
-  font-size: 3.2rem;
-  font-weight: 700;
+const Heading = styled.h2`
   color: var(--green);
   padding-bottom: 2.4rem;
-
-  @media ${(p) => p.theme.breakpoints.med} {
-    font-size: 4.8rem;
-  }
 `;
 
 const Description = styled.p`
