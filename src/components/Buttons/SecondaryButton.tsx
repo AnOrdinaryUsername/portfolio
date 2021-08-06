@@ -2,8 +2,8 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { ButtonProps, sharedButtonStyles } from './shared';
 
-function SecondaryButton({ children, size = 'md' }: ButtonProps) {
-  return <Secondary>{children}</Secondary>;
+function SecondaryButton({ children, size = 'md', ...props }: ButtonProps) {
+  return <Secondary {...props}>{children}</Secondary>;
 }
 
 export const secondaryButtonStyles = css`

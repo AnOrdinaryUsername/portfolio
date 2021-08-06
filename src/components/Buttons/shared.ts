@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css } from 'styled-components';
 
-export interface ButtonProps {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode | string;
   size?: 'sm' | 'md' | 'lg';
 }

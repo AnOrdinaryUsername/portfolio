@@ -2,8 +2,8 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { ButtonProps, sharedButtonStyles } from './shared';
 
-function PrimaryButton({ children, size = 'md' }: ButtonProps) {
-  return <Primary>{children}</Primary>;
+function PrimaryButton({ children, size = 'md', ...props }: ButtonProps) {
+  return <Primary {...props}>{children}</Primary>;
 }
 
 export const primaryButtonStyles = css`
