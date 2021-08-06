@@ -15,7 +15,6 @@ function TextArea({ labelName, identifier, ...props }: TextAreaProps) {
 
 const TextAreaField = styled.textarea`
   ${formFieldStyles}
-  font-size: 1.6rem;
   font-family: inherit;
   height: 12rem;
   padding: 0.8rem 1.4rem;

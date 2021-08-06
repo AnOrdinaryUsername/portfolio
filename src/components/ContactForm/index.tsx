@@ -9,21 +9,21 @@ function ContactForm() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <fieldset>
+      <Fieldset>
         <Legend>
-          <Heading>Contact Me</Heading>
-          <Input labelName="Email" identifier="email" type="email" name="email" />
-          <ValidationError prefix="Email" field="email" errors={state.errors} />
-          <Input labelName="Subject" identifier="subject" type="text" name="subject" />
-          <ValidationError prefix="Subject" field="subject" errors={state.errors} />
-          <TextArea labelName="Message" identifier="message" name="message" />
-          <ValidationError prefix="Message" field="message" errors={state.errors} />
-          <PrimaryButton style={{ padding: '1.2rem' }} type="submit" disabled={state.submitting}>
-            Submit
-          </PrimaryButton>
-          <SubmitSuccess isSuccess={state.succeeded}>Message has been sent!</SubmitSuccess>
+          <h2>Contact Me</h2>
         </Legend>
-      </fieldset>
+        <Input labelName="Email" identifier="email" type="email" name="email" />
+        <ValidationError prefix="Email" field="email" errors={state.errors} />
+        <Input labelName="Subject" identifier="subject" type="text" name="subject" />
+        <ValidationError prefix="Subject" field="subject" errors={state.errors} />
+        <TextArea labelName="Message" identifier="message" name="message" />
+        <ValidationError prefix="Message" field="message" errors={state.errors} />
+        <PrimaryButton style={{ padding: '1.2rem' }} type="submit" disabled={state.submitting}>
+          Submit
+        </PrimaryButton>
+        <SubmitSuccess isSuccess={state.succeeded}>Message has been sent!</SubmitSuccess>
+      </Fieldset>
     </Form>
   );
 }
@@ -39,21 +39,21 @@ const Form = styled.form`
   }
 `;
 
-export const Legend = styled.legend`
+export const Fieldset = styled.fieldset`
   display: flex;
   flex-direction: column;
   width: 100%;
 
-  & > * {
+  & > *:not(:first-child) {
     margin-top: 1.6rem;
   }
 `;
 
-const Heading = styled.h2`
-  text-align: center;
+const Legend = styled.legend`
+  margin: 0 auto;
 
   @media ${(p) => p.theme.breakpoints.lg} {
-    text-align: left;
+    margin: 0;
   }
 `;
 

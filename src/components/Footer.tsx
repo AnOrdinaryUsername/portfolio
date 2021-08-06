@@ -7,7 +7,6 @@ function Footer() {
 const CustomFooter = styled.footer`
   position: relative;
   z-index: 1;
-  width: 100%;
   padding: 3.2rem;
   text-align: center;
   background-color: var(--bg-tertiary);
