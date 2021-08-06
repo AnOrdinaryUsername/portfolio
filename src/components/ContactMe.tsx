@@ -1,4 +1,4 @@
-import { InputText } from 'components/Inputs';
+import ContactForm from 'components/ContactForm';
 import Sparkles from 'components/Sparkles';
 import { Bob } from 'components/Svgs/Background';
 import { useWindowSize } from 'hooks';
@@ -7,19 +7,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { BREAKPOINT_SIZES } from '../constants';
 
-interface EmailSender {
-  email: string;
-  subject: string;
-  message: string;
-}
-
 function ContactMe() {
-  const sender: EmailSender = {
-    email: '',
-    subject: '',
-    message: '',
-  };
-  const [contactInfo, setContactInfo] = React.useState<EmailSender>(sender);
   const { width } = useWindowSize();
   const isMobile = width < BREAKPOINT_SIZES.sm;
   const bobHeight = isMobile ? '300' : undefined;
@@ -29,48 +17,9 @@ function ContactMe() {
     max: isMobile ? 12 : 20,
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setContactInfo({
-      ...contactInfo,
-      [name]: value,
-    });
-  };
-
-  React.useEffect(() => {
-    console.log(contactInfo);
-  }, [contactInfo]);
-
   return (
     <Section>
-      <Form>
-        <fieldset>
-          <Legend>
-            <Heading>Contact Me</Heading>
-            <InputText
-              labelName="Email"
-              isRequired={true}
-              id="email"
-              value={contactInfo.email}
-              onChange={handleInputChange}
-            />
-            <InputText
-              labelName="Subject"
-              isRequired={true}
-              id="subject"
-              value={contactInfo.subject}
-              onChange={handleInputChange}
-            />
-            <InputText
-              labelName="Message"
-              isRequired={true}
-              id="message"
-              value={contactInfo.message}
-              onChange={handleInputChange}
-            />
-          </Legend>
-        </fieldset>
-      </Form>
+      <ContactForm />
       <Aside>
         <SpeechBubble>
           <BobSays>
@@ -104,38 +53,6 @@ const Section = styled.section`
   @media ${(p) => p.theme.breakpoints.lg} {
     flex-direction: row;
     justify-content: space-between;
-  }
-`;
-
-const Form = styled.form`
-  max-width: 46rem;
-  width: 100%;
-  margin-bottom: 2.4rem;
-
-  @media ${(p) => p.theme.breakpoints.med} {
-    max-width: 52rem;
-  }
-
-  @media ${(p) => p.theme.breakpoints.lg} {
-    max-width: 46rem;
-    margin-bottom: 0;
-    margin-right: 4.8rem;
-  }
-`;
-
-const Legend = styled.legend`
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0.8rem;
-  width: 100%;
-`;
-
-const Heading = styled.h2`
-  text-align: center;
-  margin-bottom: 3.2rem;
-
-  @media ${(p) => p.theme.breakpoints.lg} {
-    text-align: left;
   }
 `;
 
