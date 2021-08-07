@@ -21,7 +21,11 @@ function AboutMe() {
         </Description>
       </DonoWall>
       <ImageWrapper>
-        <Image src={theThinker} alt="The thinker sculpture with my GitHub profile picture on it" />
+        <Image
+          src={theThinker}
+          alt="The thinker sculpture with my GitHub profile picture on it"
+          placeholder="blur"
+        />
         <BackgroundList />
         <BackgroundDots />
       </ImageWrapper>
@@ -32,8 +36,10 @@ function AboutMe() {
 const Section = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 2.4rem;
   margin-bottom: 9.6rem;
+  height: 90vh;
 
   @media ${(p) => p.theme.breakpoints.med} {
     margin-top: 4.8rem;

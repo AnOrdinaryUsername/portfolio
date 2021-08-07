@@ -51,10 +51,7 @@ export const Fieldset = styled.fieldset`
 
 const Legend = styled.legend`
   margin: 0 auto;
-
-  @media ${(p) => p.theme.breakpoints.lg} {
-    margin: 0;
-  }
+  margin-bottom: 0.8rem;
 `;
 
 interface SubmitSuccessProps {

@@ -51,7 +51,7 @@ const Section = styled.section`
   justify-content: flex-end;
 
   @media ${(p) => p.theme.breakpoints.lg} {
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: space-between;
   }
 `;

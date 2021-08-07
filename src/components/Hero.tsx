@@ -25,7 +25,7 @@ function Hero() {
           </ButtonWrapper>
         </Introduction>
         <ImageWrapper>
-          <Image src={heroImage} alt="" />
+          <Image src={heroImage} alt="" placeholder="blur" />
         </ImageWrapper>
       </Header>
     </>
