@@ -1,4 +1,6 @@
 export { default as Close } from './Close';
+export { default as ExternalLink } from './ExternalLink';
+export { default as GithubLogo } from './GithubLogo';
 export { default as Logo } from './Logo';
 export { default as Menu } from './Menu';
 export { default as Moon } from './Moon';
