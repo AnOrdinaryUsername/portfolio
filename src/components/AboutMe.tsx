@@ -37,12 +37,11 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2.4rem;
-  margin-bottom: 9.6rem;
+  margin-bottom: 14.4rem;
   height: auto;
 
-  @media ${(p) => p.theme.breakpoints.med} {
-    margin-top: 4.8rem;
+  @media ${(p) => p.theme.breakpoints.sm} {
+    margin-top: 12.8rem;
   }
 
   @media ${(p) => p.theme.breakpoints.lg} {
