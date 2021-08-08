@@ -136,6 +136,10 @@ export const COLORS: ColorMode = {
     light: 'hsl(0, 0%, 0%, 0.1)',
     dark: 'hsl(219, 17%, 32%, 0.1)',
   },
+  'project-drop-shadow': {
+    light: 'drop-shadow(0px 0px 2px hsl(212,12%,48%))',
+    dark: 'drop-shadow(2px 4px 6px hsl(212,12%,15%))',
+  },
 };
 
 export const THEME: DefaultTheme = {

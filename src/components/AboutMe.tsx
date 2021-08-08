@@ -39,7 +39,7 @@ const Section = styled.section`
   align-items: center;
   margin-top: 2.4rem;
   margin-bottom: 9.6rem;
-  height: 90vh;
+  height: auto;
 
   @media ${(p) => p.theme.breakpoints.med} {
     margin-top: 4.8rem;
@@ -48,6 +48,7 @@ const Section = styled.section`
   @media ${(p) => p.theme.breakpoints.lg} {
     margin-top: 0;
     flex-direction: row;
+    height: 90vh;
   }
 `;
 
