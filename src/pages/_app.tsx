@@ -220,6 +220,15 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
         }
     }
 
+    h3 {
+        font-size: 2.4rem;
+        font-weight: 700;
+
+        @media ${(p) => p.theme.breakpoints.med} {
+            font-size: 3.6rem;
+        }
+    }
+
     header, section {
         width: 100%;
         max-width: 110rem;
