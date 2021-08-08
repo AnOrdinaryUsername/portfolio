@@ -18,13 +18,14 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 11.2rem;
 
   & > *:last-child {
     margin-top: 6.4rem;
   }
 
   @media ${(p) => p.theme.breakpoints.lg} {
+    margin-bottom: 11.2rem;
+
     & > *:last-child {
       margin-top: 9.6rem;
     }
@@ -33,7 +34,7 @@ const Section = styled.section`
 
 const Heading = styled.h2`
   align-self: center;
-  margin-bottom: 4.8rem;
+  margin-bottom: 3.2rem;
 `;
 
 export default ProjectsShowcase;

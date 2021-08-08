@@ -23,8 +23,8 @@ const projects: Array<ProjectCardData> = [
     description:
       'A command-line interface app using the Danbooru ' +
       'and Safebooru API to display anime fanart in your terminal.',
-    repoLink: 'https://github.com/AnOrdinaryUsername/Shopping-Cart/',
-    websiteLink: 'https://anordinaryusername.github.io/Shopping-Cart/#/',
+    repoLink: 'https://github.com/AnOrdinaryUsername/show-waifu',
+    websiteLink: 'https://crates.io/crates/show-waifu',
   },
   {
     image: {
@@ -42,8 +42,8 @@ const projects: Array<ProjectCardData> = [
     technologies: 'React, TypeScript, and react-router',
     description:
       'Your one-stop shop for Scalable Vector ' + 'Graphics. Made with lots and lots of love.',
-    repoLink: 'https://github.com/AnOrdinaryUsername/show-waifu',
-    websiteLink: 'https://crates.io/crates/show-waifu',
+    repoLink: 'https://github.com/AnOrdinaryUsername/Shopping-Cart/',
+    websiteLink: 'https://anordinaryusername.github.io/Shopping-Cart/#/',
   },
 ];
 
