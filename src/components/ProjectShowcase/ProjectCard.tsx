@@ -188,9 +188,15 @@ const Anchor = styled.a`
   background: lightgray;
   color: ${NORD_THEME.nord3};
   border-radius: 4px;
-  background: hsl(225, 22%, 92%);
+  background: hsl(225, 22%, 91%);
   max-width: 15rem;
   width: 100%;
+  transition: background 200ms ease-out;
+
+  &:hover {
+    transition: background 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: hsl(225, 22%, 87%);
+  }
 
   & > *:nth-child(1) {
     margin-right: 0.8rem;
