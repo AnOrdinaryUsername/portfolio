@@ -1,14 +1,19 @@
 import { useForm, ValidationError } from '@formspree/react';
 import { PrimaryButton } from 'components/Buttons';
+import * as React from 'react';
 import styled from 'styled-components';
 import Input from './Input';
 import TextArea from './TextArea';
 
-function ContactForm() {
+interface ContactFormProps {
+  formRef: React.Ref<HTMLFormElement>;
+}
+
+function ContactForm({ formRef }: ContactFormProps) {
   const [state, handleSubmit] = useForm('xyylnlwn');
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} ref={formRef}>
       <Fieldset>
         <Legend>
           <h2>Contact Me</h2>
@@ -34,6 +39,7 @@ const Form = styled.form`
   margin-bottom: 2.4rem;
 
   @media ${(p) => p.theme.breakpoints.lg} {
+    padding-bottom: 8rem;
     margin-bottom: 0;
     margin-right: 4.8rem;
   }

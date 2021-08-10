@@ -1,11 +1,15 @@
-import { PrimaryButton, TertiaryButton } from 'components/Buttons';
+import { primaryButtonStyles, sharedButtonStyles, tertiaryButtonStyles } from 'components/Buttons';
 import Metadata from 'components/Metadata';
 import { HollowDots } from 'components/Svgs/Background';
 import Image from 'next/image';
 import styled from 'styled-components';
 import heroImage from '../../public/images/hero-image.png';
 
-function Hero() {
+interface HeroProps {
+  scrollToContact: () => void;
+}
+
+function Hero({ scrollToContact }: HeroProps) {
   return (
     <>
       <Metadata />
@@ -20,8 +24,10 @@ function Hero() {
             A <JobTitle>front-end developer</JobTitle> that loves to make things pretty.
           </Description>
           <ButtonWrapper>
-            <PrimaryButton>Resume</PrimaryButton>
-            <TertiaryButton>View more projects</TertiaryButton>
+            <ShowResume href="resume.pdf" target="_blank" rel="noopener noreferrer">
+              Resume
+            </ShowResume>
+            <ContactButton onClick={scrollToContact}>Send me a message</ContactButton>
           </ButtonWrapper>
         </Introduction>
         <ImageWrapper>
@@ -47,6 +53,10 @@ const Header = styled.header`
 
   @media ${(p) => p.theme.breakpoints.med} {
     align-items: flex-start;
+  }
+
+  @media (min-width: 576px) and (max-width: 992px) {
+    padding-top: 9.6rem;
   }
 
   @media ${(p) => p.theme.breakpoints.lg} {
@@ -130,6 +140,17 @@ const ButtonWrapper = styled.div`
   @media ${(p) => p.theme.breakpoints.sm} {
     gap: 1.2rem;
   }
+`;
+
+const ShowResume = styled.a`
+  ${sharedButtonStyles}
+  ${primaryButtonStyles}
+  line-height: 0;
+`;
+
+const ContactButton = styled.button`
+  ${tertiaryButtonStyles}
+  ${sharedButtonStyles}
 `;
 
 const JobTitle = styled.span`

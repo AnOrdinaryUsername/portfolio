@@ -7,7 +7,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { BREAKPOINT_SIZES } from '../constants';
 
-function ContactMe() {
+interface ContactMeProps {
+  formRef: React.Ref<HTMLFormElement>;
+}
+
+function ContactMe({ formRef }: ContactMeProps) {
   const { width } = useWindowSize();
   const isMobile = width < BREAKPOINT_SIZES.sm;
   const bobHeight = isMobile ? '300' : undefined;
@@ -19,7 +23,7 @@ function ContactMe() {
 
   return (
     <Section>
-      <ContactForm />
+      <ContactForm formRef={formRef} />
       <Aside>
         <SpeechBubble>
           <BobSays>
@@ -49,6 +53,7 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  margin-top: 14.4rem;
 
   @media ${(p) => p.theme.breakpoints.lg} {
     flex-direction: row-reverse;
