@@ -41,7 +41,7 @@ export const Wrapper = styled.div<MobileNavProps>`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 1.6rem 3.2rem;
+  padding: 3.2rem;
   max-width: 30rem;
   width: 100%;
   height: 100%;
@@ -75,7 +75,7 @@ const CloseMenuButton = styled.button`
 `;
 
 const Nav = styled.nav`
-  padding: 1.6rem 0;
+  padding: 0.8rem 0;
 `;
 
 const List = styled.ul`
