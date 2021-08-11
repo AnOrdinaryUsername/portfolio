@@ -19,7 +19,7 @@ function ServerError() {
 const Header = styled.header`
   display: grid;
   place-content: center;
-  height: 90%;
+  height: 100%;
   text-align: center;
 `;
 

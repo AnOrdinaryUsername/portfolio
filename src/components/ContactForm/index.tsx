@@ -41,7 +41,6 @@ const Form = styled.form`
   @media ${(p) => p.theme.breakpoints.lg} {
     padding-bottom: 8rem;
     margin-bottom: 0;
-    margin-right: 4.8rem;
   }
 `;
 

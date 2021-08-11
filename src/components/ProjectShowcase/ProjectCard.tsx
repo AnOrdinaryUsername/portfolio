@@ -35,7 +35,7 @@ function ProjectCard({
   websiteLink,
 }: ProjectCardProps) {
   const { width } = useWindowSize();
-  const isDesktop = width > BREAKPOINT_SIZES.lg;
+  const isDesktop = width >= BREAKPOINT_SIZES.lg;
   const isMobilePhone = width < BREAKPOINT_SIZES.sm;
   const isOdd = orderNumber % 2 === 1;
 
