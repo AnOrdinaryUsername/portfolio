@@ -58,7 +58,7 @@ function ProjectCard({
             {!isMobilePhone ? (
               <>
                 <Anchor href={repoLink} target="_blank" rel="noopener noreferrer">
-                  <GithubLogo height="25" />
+                  <GithubLogo fillColor="#181616" height="25" />
                   Repository
                 </Anchor>
                 <Anchor href={websiteLink} target="_blank" rel="noopener noreferrer">
