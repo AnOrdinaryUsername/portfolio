@@ -5,7 +5,7 @@ function GithubLogo({ height }: CustomSvgProps) {
 
   return (
     <svg viewBox="0 0 128 128" height={height ?? DEFAULT_HEIGHT}>
-      <g fill="#181616">
+      <g fill="var(--icon-color)">
         <path
           fillRule="evenodd"
           clipRule="evenodd"

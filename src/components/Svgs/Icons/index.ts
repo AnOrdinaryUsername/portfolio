@@ -1,4 +1,5 @@
 export { default as Close } from './Close';
+export { default as DiscordLogo } from './DiscordLogo';
 export { default as ExternalLink } from './ExternalLink';
 export { default as GithubLogo } from './GithubLogo';
 export { default as Logo } from './Logo';

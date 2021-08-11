@@ -140,6 +140,10 @@ export const COLORS: ColorMode = {
     light: 'drop-shadow(0px 0px 2px hsl(212,12%,48%))',
     dark: 'drop-shadow(2px 4px 6px hsl(212,12%,15%))',
   },
+  'icon-color': {
+    light: NORD_THEME.nord3,
+    dark: '#FFFFFF',
+  },
 };
 
 export const THEME: DefaultTheme = {
