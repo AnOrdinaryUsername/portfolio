@@ -21,8 +21,10 @@ function NotFound() {
 }
 
 const Header = styled.header`
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   text-align: center;
 `;

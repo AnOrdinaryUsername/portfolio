@@ -55,6 +55,7 @@ export const Fieldset = styled.fieldset`
 `;
 
 const Legend = styled.legend`
+  align-self: center;
   margin: 0 auto;
   margin-bottom: 0.8rem;
 `;

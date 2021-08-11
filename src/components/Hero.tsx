@@ -56,7 +56,7 @@ const Header = styled.header`
   }
 
   @media (min-width: 576px) and (max-width: 992px) {
-    padding-top: 9.6rem;
+    margin-top: 14.4rem;
   }
 
   @media ${(p) => p.theme.breakpoints.lg} {

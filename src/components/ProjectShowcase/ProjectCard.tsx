@@ -74,7 +74,7 @@ function ProjectCard({
                   rel="noopener noreferrer"
                   aria-label={`View the source for ${name}`}
                 >
-                  <GithubLogo height="30" />
+                  <GithubLogo fillColor="#181616" height="30" />
                 </MobileAnchor>
                 <MobileAnchor
                   href={websiteLink}
