@@ -54,9 +54,12 @@ function AnchorLink({ pagePath, pageName }: AnchorLinkProps) {
 
 const Page = styled.a`
   position: relative;
-  width: min-content;
   padding: 0.4rem 0;
   color: var(--fg-primary);
+
+  @media ${(p) => p.theme.breakpoints.med} {
+    width: min-content;
+  }
 
   &:after {
     content: '';
