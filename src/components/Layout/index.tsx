@@ -10,7 +10,7 @@ function MainLayout({ children }: MainLayoutProps) {
 }
 
 const Layout = styled.main`
-  min-height: 90vh;
+  min-height: 80vh;
   padding-left: 3.2rem;
   padding-right: 3.2rem;
 

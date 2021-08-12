@@ -1,5 +1,4 @@
 import Footer from 'components/Footer';
-import MainLayout from 'components/Layout';
 import DesktopNav from 'components/Navigation/DesktopNav';
 import MobileNav from 'components/Navigation/MobileNav';
 import { useToggle, useWindowSize } from 'hooks';
@@ -39,9 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={THEME}>
         <GlobalStyles isMobileNavOpen={isMobileNavOpen} />
         <DesktopNav toggleMenu={setIsMobileNavOpen} isSmallerThanDesktop={isSmallerThanDesktop} />
-        <MainLayout>
-          <Component {...pageProps} />
-        </MainLayout>
+        <Component {...pageProps} />
         <Footer />
         {isSmallerThanDesktop && (
           <MobileNav toggleMenu={setIsMobileNavOpen} isActive={isMobileNavOpen} />
