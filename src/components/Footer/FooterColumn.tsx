@@ -53,8 +53,28 @@ function AnchorLink({ pagePath, pageName }: AnchorLinkProps) {
 }
 
 const Page = styled.a`
+  position: relative;
+  width: min-content;
   padding: 0.4rem 0;
   color: var(--fg-primary);
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-secondary);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+
+  &:hover:after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 `;
 
 export default FooterColumn;

@@ -58,7 +58,7 @@ const DonoWall = styled.div`
   padding-bottom: 2.4rem;
 
   @media ${(p) => p.theme.breakpoints.lg} {
-    max-width: 50rem;
+    max-width: 60ch;
     padding-bottom: 0;
     margin-right: 9.6rem;
   }
@@ -71,9 +71,10 @@ const Heading = styled.h2`
 
 const Description = styled.p`
   font-size: 1.6rem;
-  line-height: 1.4;
+  line-height: 1.6;
   color: var(--fg-tertiary);
   padding-bottom: 2.8rem;
+  letter-spacing: 0.035em;
 
   @media ${(p) => p.theme.breakpoints.med} {
     font-size: 2rem;

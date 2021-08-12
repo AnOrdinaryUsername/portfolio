@@ -2,11 +2,12 @@ import { primaryButtonStyles, sharedButtonStyles, tertiaryButtonStyles } from 'c
 import Metadata from 'components/Metadata';
 import { HollowDots } from 'components/Svgs/Background';
 import Image from 'next/image';
+import * as React from 'react';
 import styled from 'styled-components';
 import heroImage from '../../public/images/hero-image.png';
 
 interface HeroProps {
-  scrollToContact: () => void;
+  scrollToContact: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function Hero({ scrollToContact }: HeroProps) {
