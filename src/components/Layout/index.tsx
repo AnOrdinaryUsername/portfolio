@@ -1,13 +1,48 @@
+import Footer from 'components/Footer';
+import DesktopNav from 'components/Navigation/DesktopNav';
+import MobileNav from 'components/Navigation/MobileNav';
+import { useToggle, useWindowSize } from 'hooks';
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import { BREAKPOINT_SIZES } from '../../constants';
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
 function MainLayout({ children }: MainLayoutProps) {
-  return <Layout>{children}</Layout>;
+  const [isMobileNavOpen, setIsMobileNavOpen] = useToggle();
+  const { width } = useWindowSize();
+  const isSmallerThanDesktop = width < BREAKPOINT_SIZES.med;
+
+  React.useEffect(() => {
+    if (isMobileNavOpen) {
+      window.scrollTo(0, 0);
+    }
+  }, [isMobileNavOpen]);
+
+  return (
+    <>
+      <GlobalStyle isMobileNavOpen={isMobileNavOpen} />
+      <DesktopNav toggleMenu={setIsMobileNavOpen} isSmallerThanDesktop={isSmallerThanDesktop} />
+      <Layout>{children}</Layout>
+      <Footer />
+      {isSmallerThanDesktop && (
+        <MobileNav toggleMenu={setIsMobileNavOpen} isActive={isMobileNavOpen} />
+      )}
+    </>
+  );
 }
+
+interface GlobalStylesProps {
+  isMobileNavOpen: boolean;
+}
+
+const GlobalStyle = createGlobalStyle<GlobalStylesProps>`
+  body {
+    overflow: ${(p) => p.isMobileNavOpen && 'hidden'};
+  }
+`;
 
 const Layout = styled.main`
   min-height: 80vh;

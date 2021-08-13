@@ -1,23 +1,21 @@
-import Footer from 'components/Footer';
-import DesktopNav from 'components/Navigation/DesktopNav';
-import MobileNav from 'components/Navigation/MobileNav';
-import { useToggle, useWindowSize } from 'hooks';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import * as React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { BREAKPOINT_SIZES, THEME } from '../constants';
+import { THEME } from '../constants';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const [isMobileNavOpen, setIsMobileNavOpen] = useToggle();
-  const { width } = useWindowSize();
-  const isSmallerThanDesktop = width < BREAKPOINT_SIZES.med;
+interface CustomAppProps extends Omit<AppProps, 'Component'> {
+  Component: AppProps['Component'] & { layout: React.ElementType };
+}
 
-  React.useEffect(() => {
-    if (isMobileNavOpen) {
-      window.scrollTo(0, 0);
-    }
-  }, [isMobileNavOpen]);
+interface NoLayoutProps {
+  children: React.ReactNode;
+}
+
+const NoLayout = ({ children }: NoLayoutProps) => <>{children}</>;
+
+function MyApp({ Component, pageProps }: CustomAppProps) {
+  const Layout = Component.layout ?? NoLayout;
 
   return (
     <>
@@ -36,23 +34,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#2e3440" />
       </Head>
       <ThemeProvider theme={THEME}>
-        <GlobalStyles isMobileNavOpen={isMobileNavOpen} />
-        <DesktopNav toggleMenu={setIsMobileNavOpen} isSmallerThanDesktop={isSmallerThanDesktop} />
-        <Component {...pageProps} />
-        <Footer />
-        {isSmallerThanDesktop && (
-          <MobileNav toggleMenu={setIsMobileNavOpen} isActive={isMobileNavOpen} />
-        )}
+        <GlobalStyles />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   );
 }
 
-interface GlobalStylesProps {
-  isMobileNavOpen: boolean;
-}
-
-const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
+const GlobalStyles = createGlobalStyle`
     /* http://meyerweb.com/eric/tools/css/reset/ 
     v2.0 | 20110126
     License: none (public domain)
@@ -160,8 +151,6 @@ const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
         overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-
-        overflow: ${(p) => p.isMobileNavOpen && 'hidden'};
     }
 
     body::-webkit-scrollbar {

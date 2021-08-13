@@ -2,9 +2,11 @@ import MainLayout from 'components/Layout';
 import Metadata from 'components/Metadata';
 import styled from 'styled-components';
 
+ServerError.layout = MainLayout;
+
 function ServerError() {
   return (
-    <MainLayout>
+    <>
       <Metadata title="500 | Server Error" />
       <Header>
         <StatusCode>
@@ -13,7 +15,7 @@ function ServerError() {
         <Description>Oh no!!! The server made a big OOPSIE WOOPSIE!!</Description>
         <Description>Please try again later.</Description>
       </Header>
-    </MainLayout>
+    </>
   );
 }
 

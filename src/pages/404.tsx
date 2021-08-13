@@ -3,11 +3,13 @@ import Metadata from 'components/Metadata';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+NotFound.layout = MainLayout;
+
 function NotFound() {
   const pagePath = useRouter().asPath;
 
   return (
-    <MainLayout>
+    <>
       <Metadata title="404 | Not Found" />
       <Header>
         <StatusCode>
@@ -17,7 +19,7 @@ function NotFound() {
           Sorry, the page <code>{pagePath}</code> does not exist.
         </Description>
       </Header>
-    </MainLayout>
+    </>
   );
 }
 

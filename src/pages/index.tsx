@@ -6,6 +6,8 @@ import Metadata from 'components/Metadata';
 import ProjectsShowcase from 'components/ProjectShowcase';
 import * as React from 'react';
 
+Home.layout = MainLayout;
+
 function Home() {
   const formRef = React.useRef<HTMLFormElement>(null);
 
@@ -14,13 +16,13 @@ function Home() {
   }
 
   return (
-    <MainLayout>
+    <>
       <Metadata />
       <Hero scrollToContact={scrollToContactForm} />
       <AboutMe />
       <ProjectsShowcase />
       <ContactMe formRef={formRef} />
-    </MainLayout>
+    </>
   );
 }
 
