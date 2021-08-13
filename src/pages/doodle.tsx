@@ -1,9 +1,9 @@
-import Canvas from 'components/DoodleBoard/Canvas';
+import DoodleBoard from 'components/DoodleBoard';
 
 function Doodle() {
   return (
     <main>
-      <Canvas />
+      <DoodleBoard />
     </main>
   );
 }
