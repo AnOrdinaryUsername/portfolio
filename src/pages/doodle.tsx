@@ -1,18 +1,32 @@
 import DoodleBoard from 'components/DoodleBoard';
-import Script from 'next/script';
+import * as React from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
 
 function Doodle() {
   return (
     <>
-      <Script
-        src="https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.min.js"
-        strategy="beforeInteractive"
-      />
-      <main>
+      <GlobalStyles />
+      <Main>
         <DoodleBoard />
-      </main>
+      </Main>
     </>
   );
 }
+
+// Toggle overflow property when the user press the go back button and changes the route.
+const GlobalStyles = createGlobalStyle`
+  html, body {
+    overflow: hidden;
+  }
+`;
+
+const Main = styled.main`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+`;
 
 export default Doodle;
