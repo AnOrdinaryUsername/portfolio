@@ -140,6 +140,11 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
     }
 
+    html, body {
+        /* To prevent pull down refresh behavior on Doodle page in mobile Chrome */
+        overscroll-behavior-y: contain;
+    }
+
     body {
         display: flex;
         flex: 1;

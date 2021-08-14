@@ -4,11 +4,9 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
 import { NORD_THEME } from '../../constants';
-
-type Coordinates = {
-  x: number;
-  y: number;
-};
+import Drawing from './Drawing';
+import { Coordinates } from './shared';
+import Toolbar from './Toolbar';
 
 type DrawEvent = React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>;
 
@@ -20,7 +18,7 @@ function DoodleBoard() {
 
   const goBackToPreviousPage = () => router.back();
 
-  const relativeCoordinatesForEvent = (event: DrawEvent) => {
+  const grabCoordinates = (event: DrawEvent) => {
     if (boardRef.current) {
       const boundingRect = boardRef.current.getBoundingClientRect();
 
@@ -43,14 +41,14 @@ function DoodleBoard() {
     };
   };
 
-  const handleMouseDown = (event: DrawEvent) => {
+  const getStartingPoint = (event: DrawEvent) => {
     if ('button' in event) {
       if (event.button !== 0) {
         return;
       }
     }
 
-    const point = relativeCoordinatesForEvent(event);
+    const point = grabCoordinates(event);
 
     setLines((prevState) => {
       const copiedArray = [...prevState];
@@ -60,16 +58,16 @@ function DoodleBoard() {
     setIsDrawing(true);
   };
 
-  const handleMouseMove = (event: DrawEvent) => {
+  const createPath = (event: DrawEvent) => {
     if (!isDrawing) {
       return;
     }
 
-    const point = relativeCoordinatesForEvent(event);
+    const point = grabCoordinates(event);
     setLines((prevState) => {
       const copiedArray = [...prevState];
-      const lastStroke = copiedArray.length - 1;
-      copiedArray[lastStroke].push(point);
+      const lastPath = copiedArray.length - 1;
+      copiedArray[lastPath].push(point);
       return copiedArray;
     });
   };
@@ -91,16 +89,17 @@ function DoodleBoard() {
   return (
     <DrawingBoard
       ref={boardRef}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onTouchStart={handleMouseDown}
-      onTouchMove={handleMouseMove}
+      onMouseDown={getStartingPoint}
+      onMouseMove={createPath}
+      onTouchStart={getStartingPoint}
+      onTouchMove={createPath}
     >
       <BackButton onClick={goBackToPreviousPage}>
         <ArrowLeft height="20" />
         Go Back
       </BackButton>
       <Drawing lines={lines} />
+      <Toolbar />
     </DrawingBoard>
   );
 }
@@ -111,6 +110,7 @@ const DrawingBoard = styled.div`
   top: 0;
   height: 100%;
   width: 100%;
+  overflow: hidden;
   background: hsl(0, 0%, 100%);
 `;
 
@@ -131,49 +131,6 @@ const BackButton = styled.button`
     align-self: flex-end;
     margin-right: 0.6rem;
   }
-`;
-
-interface DrawingProps {
-  lines: Coordinates[][];
-}
-
-function Drawing({ lines }: DrawingProps) {
-  return (
-    <Svg>
-      {lines.map((line, index) => (
-        <DrawingLine key={index} line={line} />
-      ))}
-    </Svg>
-  );
-}
-
-const Svg = styled.svg`
-  width: 100%;
-  height: 100%;
-`;
-
-interface DrawingLineProps {
-  line: Coordinates[];
-}
-
-function DrawingLine({ line }: DrawingLineProps) {
-  const pathData =
-    'M ' +
-    line
-      .map((p) => {
-        return `${p.x} ${p.y}`;
-      })
-      .join(' L ');
-
-  return <Stroke d={pathData} />;
-}
-
-const Stroke = styled.path`
-  fill: none;
-  stroke-width: 10px;
-  stroke: black;
-  stroke-linejoin: round;
-  stroke-linecap: round;
 `;
 
 export default DoodleBoard;
