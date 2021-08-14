@@ -125,6 +125,21 @@ const SocialLinks = styled.div`
 const AnchorLink = styled.a`
   line-height: 0;
   padding: 0 1rem;
+
+  & > svg * {
+    transition: fill 200ms ease-out;
+  }
+
+  /* Primary accent for logo */
+  &:hover > svg * {
+    fill: var(--accent-primary);
+  }
+
+  /* Secondary accent for social links */
+  ${SocialLinks} &:hover > svg * {
+    transition: fill 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    fill: var(--accent-secondary);
+  }
 `;
 
 const Right = styled.div`
