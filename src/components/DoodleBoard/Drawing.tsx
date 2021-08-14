@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import type { Coordinates } from './shared';
+import type { Coordinates, Paths, StrokeSettings } from './shared';
 
 interface DrawingProps {
-  lines: Coordinates[][];
+  lines: Paths[][];
 }
 
 function Drawing({ lines }: DrawingProps) {
   return (
     <Svg>
       {lines.map((line, index) => (
-        <DrawingLine key={index} line={line} />
+        <DrawingLine strokeSettings={line[0].strokeSettings} key={index} line={line[0].points} />
       ))}
     </Svg>
   );
@@ -22,9 +22,10 @@ const Svg = styled.svg`
 
 interface DrawingLineProps {
   line: Coordinates[];
+  strokeSettings: StrokeSettings;
 }
 
-function DrawingLine({ line }: DrawingLineProps) {
+function DrawingLine({ strokeSettings, line }: DrawingLineProps) {
   const pathData =
     'M ' +
     line
@@ -33,13 +34,17 @@ function DrawingLine({ line }: DrawingLineProps) {
       })
       .join(' L ');
 
-  return <Stroke d={pathData} />;
+  return <Stroke strokeSettings={strokeSettings} d={pathData} />;
 }
 
-const Stroke = styled.path`
+interface StrokeProps {
+  strokeSettings: StrokeSettings;
+}
+
+const Stroke = styled.path<StrokeProps>`
   fill: none;
   stroke-width: 10px;
-  stroke: black;
+  stroke: ${(p) => p.strokeSettings.color};
   stroke-linejoin: round;
   stroke-linecap: round;
 `;

@@ -5,15 +5,22 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { NORD_THEME } from '../../constants';
 import Drawing from './Drawing';
-import type { Coordinates } from './shared';
+import type { Paths, StrokeSettings } from './shared';
 import Toolbar from './Toolbar';
 
-type DrawEvent = React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>;
+type DrawEvent = React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>;
+
+const defaultSettings: StrokeSettings = {
+  isSolidLine: true,
+  strokeWidth: 10,
+  color: 'black',
+};
 
 function DoodleBoard() {
   const boardRef = React.useRef<HTMLDivElement>(null);
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
-  const [lines, setLines] = React.useState<Coordinates[][]>([]);
+  const [lines, setLines] = React.useState<Paths[][]>([]);
+  const [strokeSettings, setStrokeSettings] = React.useState<StrokeSettings>(defaultSettings);
   const router = useRouter();
 
   const goBackToPreviousPage = () => router.back();
@@ -52,7 +59,13 @@ function DoodleBoard() {
 
     setLines((prevState) => {
       const copiedArray = [...prevState];
-      copiedArray.push([point]);
+
+      const newPath = {
+        strokeSettings,
+        points: [point],
+      };
+
+      copiedArray.push([newPath]);
       return copiedArray;
     });
     setIsDrawing(true);
@@ -64,12 +77,21 @@ function DoodleBoard() {
     }
 
     const point = grabCoordinates(event);
+
     setLines((prevState) => {
       const copiedArray = [...prevState];
       const lastPath = copiedArray.length - 1;
-      copiedArray[lastPath].push(point);
+      copiedArray[lastPath][0].points.push(point);
       return copiedArray;
     });
+  };
+
+  const changeStrokeColor = (event: DrawEvent) => {
+    const newStrokeColor = event.currentTarget.id;
+    setStrokeSettings((prevState) => ({
+      ...prevState,
+      color: newStrokeColor,
+    }));
   };
 
   React.useEffect(() => {
@@ -99,7 +121,7 @@ function DoodleBoard() {
         Go Back
       </BackButton>
       <Drawing lines={lines} />
-      <Toolbar />
+      <Toolbar changeStrokeColor={changeStrokeColor} />
     </DrawingBoard>
   );
 }
@@ -112,6 +134,8 @@ const DrawingBoard = styled.div`
   width: 100%;
   overflow: hidden;
   background: hsl(0, 0%, 100%);
+  /* Prevents pinch to zoom on mobile */
+  touch-action: none;
 `;
 
 const BackButton = styled.button`

@@ -4,22 +4,33 @@ import { useToggle } from 'hooks';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { NORD_THEME } from '../../constants';
+import ColorPicker from './ColorPicker';
+import colors from './colors';
+import type { DrawEventHandler } from './shared';
 
-function Toolbar() {
+interface ToolbarProps {
+  changeStrokeColor: DrawEventHandler;
+}
+
+function Toolbar({ changeStrokeColor }: ToolbarProps) {
   const [isToolbarActive, setIsToolbarActive] = useToggle();
+
   return (
-    <Wrapper isToolbarActive={isToolbarActive}>
+    <Wrapper isToolbarActive={isToolbarActive} role="toolbar">
       <Flap>
         <RevealToolbarButton
+          role="tab"
           aria-label={isToolbarActive ? 'Hide toolbar' : 'Reveal toolbar'}
           onClick={setIsToolbarActive}
         >
           <ChevronUp height="50" />
         </RevealToolbarButton>
       </Flap>
-      <div>
-        <p>test</p>
-      </div>
+      <Content>
+        {colors.map((props, index) => (
+          <ColorPicker onSelectColor={changeStrokeColor} {...props} key={index} />
+        ))}
+      </Content>
     </Wrapper>
   );
 }
@@ -75,6 +86,13 @@ const Flap = styled.div`
 const RevealToolbarButton = styled.button`
   ${sharedButtonStyles}
   color: ${NORD_THEME.nord3};
+`;
+
+const Content = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 6rem);
+  gap: 1.2rem;
+  padding: 2.4rem;
 `;
 
 export default Toolbar;
