@@ -1,4 +1,4 @@
-import { FooterColumnProps } from './FooterColumn';
+import type { FooterColumnProps } from './FooterColumn';
 
 const columns: Array<FooterColumnProps> = [
   {

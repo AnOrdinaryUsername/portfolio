@@ -1,4 +1,4 @@
-import { NavItemProps } from './NavItem';
+import type { NavItemProps } from './NavItem';
 
 const links: Array<NavItemProps> = [
   {

@@ -1,4 +1,4 @@
-import { CustomSvgProps } from '../shared';
+import type { CustomSvgProps } from '../shared';
 
 function GithubLogo({ fillColor, height }: CustomSvgProps) {
   const DEFAULT_HEIGHT = '128';

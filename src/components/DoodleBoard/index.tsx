@@ -5,7 +5,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { NORD_THEME } from '../../constants';
 import Drawing from './Drawing';
-import { Coordinates } from './shared';
+import type { Coordinates } from './shared';
 import Toolbar from './Toolbar';
 
 type DrawEvent = React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>;

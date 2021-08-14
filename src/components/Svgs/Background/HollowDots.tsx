@@ -1,4 +1,4 @@
-import { CustomSvgProps } from 'components/Svgs/shared';
+import type { CustomSvgProps } from 'components/Svgs/shared';
 import { NORD_THEME } from '../../../constants';
 
 function HollowDots({ className }: CustomSvgProps) {

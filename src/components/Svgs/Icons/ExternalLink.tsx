@@ -1,4 +1,4 @@
-import { CustomSvgProps } from '../shared';
+import type { CustomSvgProps } from '../shared';
 
 function ExternalLink({ height }: CustomSvgProps) {
   const DEFAULT_HEIGHT = '24';

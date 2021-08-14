@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { ButtonProps, sharedButtonStyles } from './shared';
+import type { ButtonProps } from './shared';
+import { sharedButtonStyles } from './shared';
 
 function TertiaryButton({ children, size = 'md', ...props }: ButtonProps) {
   return <Tertiary {...props}>{children}</Tertiary>;

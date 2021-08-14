@@ -1,6 +1,6 @@
 import showWaifu from '../../../public/images/show-waifu.gif';
 import theElements from '../../../public/images/the-elements.png';
-import { ProjectCardData } from './ProjectCard';
+import type { ProjectCardData } from './ProjectCard';
 
 const projects: Array<ProjectCardData> = [
   {

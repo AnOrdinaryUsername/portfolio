@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { formFieldStyles, LabelProps, Wrapper } from './shared';
+import type { LabelProps } from './shared';
+import { formFieldStyles, Wrapper } from './shared';
 
 interface InputTextProps extends LabelProps, React.InputHTMLAttributes<HTMLInputElement> {}
 

@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { ExternalLink, GithubLogo } from 'components/Svgs/Icons';
 import { useWindowSize } from 'hooks';
-import Image, { ImageProps } from 'next/image';
+import type { ImageProps } from 'next/image';
+import Image from 'next/image';
 import styled, { css } from 'styled-components';
 import { BREAKPOINT_SIZES, NORD_THEME } from '../../constants';
 

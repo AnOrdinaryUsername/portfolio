@@ -1,4 +1,4 @@
-import { CustomSvgProps } from 'components/Svgs/shared';
+import type { CustomSvgProps } from 'components/Svgs/shared';
 
 function Bob({ width }: CustomSvgProps) {
   const DEFAULT_WIDTH = '514';
