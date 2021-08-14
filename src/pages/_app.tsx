@@ -5,7 +5,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { THEME } from '../constants';
 
 interface CustomAppProps extends Omit<AppProps, 'Component'> {
-  Component: AppProps['Component'] & { layout: React.ElementType };
+  Component: AppProps['Component'] & { layout: React.ComponentType };
 }
 
 interface NoLayoutProps {

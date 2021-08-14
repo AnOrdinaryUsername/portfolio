@@ -20,11 +20,10 @@ function ServerError() {
 }
 
 const Header = styled.header`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-content: center;
   height: 100%;
+  min-height: 50rem;
   text-align: center;
 `;
 

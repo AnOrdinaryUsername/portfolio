@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Document, {
   DocumentContext,
   DocumentInitialProps,
@@ -74,7 +75,6 @@ function setColorsByTheme() {
   Object.entries(colors).forEach(([name, colorByTheme]) => {
     const cssVarName = `--${name}`;
 
-    // @ts-ignore: Unreachable code error
     root.style.setProperty(cssVarName, colorByTheme[colorMode]);
   });
 }

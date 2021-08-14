@@ -13,7 +13,6 @@ function Doodle() {
   );
 }
 
-// Toggle overflow property when the user press the go back button and changes the route.
 const GlobalStyles = createGlobalStyle`
   html, body {
     overflow: hidden;
