@@ -5,10 +5,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { NORD_THEME } from '../../constants';
 import Drawing from './Drawing';
-import type { Paths, StrokeSettings } from './shared';
+import type { DrawEvent, Paths, StrokeSettings } from './shared';
 import Toolbar from './Toolbar';
-
-type DrawEvent = React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>;
 
 const defaultSettings: StrokeSettings = {
   isSolidLine: true,
@@ -94,6 +92,32 @@ function DoodleBoard() {
     }));
   };
 
+  const deleteDrawing = () => {
+    setLines([]);
+  };
+
+  const undoLine = () => {
+    setLines((prevState) => {
+      const drawing = [...prevState];
+      const lastPath = drawing.length - 1;
+
+      /* The below code removes each point from a line. 
+      * If you want to include it, uncomment this block.
+
+      if (drawing[lastPath][0].points.length !== 0) {
+        drawing[lastPath][0].points.pop();
+      }
+      */
+
+      // Remove the last path made in its entirety
+      if (drawing.length !== 0) {
+        drawing.pop();
+      }
+
+      return drawing;
+    });
+  };
+
   React.useEffect(() => {
     const disableDrawing = () => {
       setIsDrawing(false);
@@ -109,26 +133,32 @@ function DoodleBoard() {
   }, []);
 
   return (
-    <DrawingBoard
-      ref={boardRef}
-      onMouseDown={getStartingPoint}
-      onMouseMove={createPath}
-      onTouchStart={getStartingPoint}
-      onTouchMove={createPath}
-    >
-      <BackButton onClick={goBackToPreviousPage}>
-        <ArrowLeft height="20" />
-        Go Back
-      </BackButton>
-      <Drawing lines={lines} />
-      <Toolbar changeStrokeColor={changeStrokeColor} />
-    </DrawingBoard>
+    <>
+      <DrawingBoard
+        ref={boardRef}
+        onMouseDown={getStartingPoint}
+        onMouseMove={createPath}
+        onTouchStart={getStartingPoint}
+        onTouchMove={createPath}
+      >
+        <BackButton onClick={goBackToPreviousPage}>
+          <ArrowLeft height="20" />
+          Go Back
+        </BackButton>
+        <Drawing lines={lines} />
+      </DrawingBoard>
+      <Toolbar
+        deleteDrawing={deleteDrawing}
+        undoLine={undoLine}
+        changeStrokeColor={changeStrokeColor}
+      />
+    </>
   );
 }
 
 const DrawingBoard = styled.div`
   position: absolute;
-  z-index: 1000;
+  z-index: 10;
   top: 0;
   height: 100%;
   width: 100%;

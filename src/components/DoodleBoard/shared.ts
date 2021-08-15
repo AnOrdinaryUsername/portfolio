@@ -8,6 +8,8 @@ export type Paths = {
   points: Coordinates[];
 };
 
+export type DrawEvent = React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>;
+
 export type DrawEventHandler = React.TouchEventHandler<HTMLDivElement> &
   React.MouseEventHandler<HTMLDivElement>;
 
