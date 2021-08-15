@@ -18,6 +18,7 @@ const HiddenText = styled.span`
   position: absolute;
   width: 1px;
   white-space: nowrap;
+  user-select: none;
 `;
 
 export default VisuallyHidden;

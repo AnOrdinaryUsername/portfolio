@@ -25,7 +25,7 @@ const Main = styled.main`
   bottom: 0;
   left: 0;
   right: 0;
-  overflow: auto;
+  overflow: hidden;
 `;
 
 export default Doodle;

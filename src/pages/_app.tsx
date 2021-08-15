@@ -182,6 +182,8 @@ const GlobalStyles = createGlobalStyle`
         font-family: inherit;
         font-size: inherit;
         line-height: normal;
+        /* For no grey rectangle when you click on a button on mobile */
+        -webkit-tap-highlight-color: transparent;
     }
 
     code {

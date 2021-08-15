@@ -122,6 +122,7 @@ const Description = styled.p`
   padding-top: 3.2rem;
   padding-bottom: 2.4rem;
   line-height: 1.4;
+  color: hsl(219, 28%, 84%);
 
   @media ${(p) => p.theme.breakpoints.med} {
     font-size: 2.4rem;
