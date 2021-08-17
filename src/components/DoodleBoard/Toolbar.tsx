@@ -201,13 +201,14 @@ const RevealToolbarButton = styled.button`
 
 const Content = styled.div`
   display: flex;
-  justify-content: space-around;
   padding: 2.4rem;
+  padding-bottom: 4.8rem;
   gap: 3.2rem;
   overflow-x: auto;
 
   @media ${(p) => p.theme.breakpoints.sm} {
     padding: 4.8rem;
+    justify-content: space-around;
     overflow-x: initial;
   }
 
