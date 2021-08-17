@@ -1,7 +1,7 @@
 import VisuallyHidden from 'components/VisuallyHidden';
 import * as React from 'react';
 import styled from 'styled-components';
-import type { DrawEventHandler } from './shared';
+import type { DrawEventHandler } from '../shared';
 
 export interface Color {
   hexColorCode: string;
@@ -10,14 +10,21 @@ export interface Color {
 
 interface ColorPickerProps extends Color {
   onSelectColor: DrawEventHandler;
+  tabIndex: number;
   isInFocus: boolean;
 }
 
-function ColorPicker({ onSelectColor, isInFocus, hexColorCode, colorName }: ColorPickerProps) {
+function ColorPicker({
+  onSelectColor,
+  tabIndex,
+  isInFocus,
+  hexColorCode,
+  colorName,
+}: ColorPickerProps) {
   return (
     <ColoredSquare
-      tabIndex={0}
       onClick={onSelectColor}
+      tabIndex={tabIndex}
       isInFocus={isInFocus}
       id={hexColorCode}
       boxColor={hexColorCode}
@@ -42,7 +49,9 @@ const ColoredSquare = styled.div<ColoredSquareProps>`
   /* Shadow outline to know which element is currently selected */
   box-shadow: ${(p) => p.isInFocus && '0 0 0 6px hsl(242, 22%, 80%)'};
 
-  /* Adds initial focus when color is selected. Without this, the element */
+  /* Adds initial focus when color is selected. 
+    Without this, the element doesn't gain initial focus.
+  */
   &:focus {
     box-shadow: 0 0 0 6px hsl(242, 22%, 80%);
   }

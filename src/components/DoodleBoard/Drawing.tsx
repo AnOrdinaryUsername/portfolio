@@ -1,3 +1,4 @@
+import * as React from 'react';
 import styled from 'styled-components';
 import type { Coordinates, Paths, StrokeSettings } from './shared';
 
@@ -18,6 +19,7 @@ function Drawing({ lines }: DrawingProps) {
 const Svg = styled.svg`
   width: 100%;
   height: 100%;
+  background: inherit;
 `;
 
 interface DrawingLineProps {
@@ -43,7 +45,7 @@ interface StrokeProps {
 
 const Stroke = styled.path<StrokeProps>`
   fill: none;
-  stroke-width: 10px;
+  stroke-width: ${(p) => `${p.strokeSettings.strokeWidth}px`};
   stroke: ${(p) => p.strokeSettings.color};
   stroke-linejoin: round;
   stroke-linecap: round;

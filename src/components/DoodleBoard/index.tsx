@@ -19,6 +19,8 @@ function DoodleBoard() {
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
   const [lines, setLines] = React.useState<Paths[][]>([]);
   const [strokeSettings, setStrokeSettings] = React.useState<StrokeSettings>(defaultSettings);
+  const [customColor, setCustomColor] = React.useState<string>('#2b2b2b');
+  const divRef = React.useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const goBackToPreviousPage = () => router.back();
@@ -92,6 +94,14 @@ function DoodleBoard() {
     }));
   };
 
+  // Since lines overlap, using white on a white background sort of works as an eraser.
+  const useEraser = () => {
+    setStrokeSettings((prevState) => ({
+      ...prevState,
+      color: '#FFFFFF',
+    }));
+  };
+
   const deleteDrawing = () => {
     setLines([]);
   };
@@ -117,6 +127,13 @@ function DoodleBoard() {
       return drawing;
     });
   };
+
+  React.useEffect(() => {
+    setStrokeSettings((prevState) => ({
+      ...prevState,
+      color: customColor,
+    }));
+  }, [customColor]);
 
   React.useEffect(() => {
     const disableDrawing = () => {
@@ -145,9 +162,17 @@ function DoodleBoard() {
           <ArrowLeft height="20" />
           Go Back
         </BackButton>
-        <Drawing lines={lines} />
+        <DrawingWrapper ref={divRef}>
+          <Drawing lines={lines} />
+        </DrawingWrapper>
       </DrawingBoard>
       <Toolbar
+        currentColor={strokeSettings.color}
+        isDrawing={isDrawing}
+        divRef={divRef}
+        customColor={customColor}
+        chooseCustomColor={setCustomColor}
+        useEraser={useEraser}
         deleteDrawing={deleteDrawing}
         undoLine={undoLine}
         changeStrokeColor={changeStrokeColor}
@@ -166,6 +191,11 @@ const DrawingBoard = styled.div`
   background: hsl(0, 0%, 100%);
   /* Prevents pinch to zoom on mobile */
   touch-action: none;
+`;
+
+const DrawingWrapper = styled.div`
+  height: 100%;
+  width: 100%;
 `;
 
 const BackButton = styled.button`
