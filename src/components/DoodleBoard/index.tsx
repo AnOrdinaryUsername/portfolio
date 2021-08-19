@@ -6,7 +6,9 @@ import styled from 'styled-components';
 import { NORD_THEME } from '../../constants';
 import Drawing from './Drawing';
 import type { DrawEvent, Paths, StrokeSettings } from './shared';
-import Toolbar from './Toolbar';
+import Toolbar from './Toolbar/';
+import { DeleteDialog } from './Dialog';
+import { useToggle } from 'hooks';
 
 const defaultSettings: StrokeSettings = {
   isSolidLine: true,
@@ -21,6 +23,7 @@ function DoodleBoard() {
   const [strokeSettings, setStrokeSettings] = React.useState<StrokeSettings>(defaultSettings);
   const [customColor, setCustomColor] = React.useState<string>('#2b2b2b');
   const divRef = React.useRef<HTMLDivElement>(null);
+  const [isDialogOpen, setIsDialogOpen] = useToggle();
   const router = useRouter();
 
   const goBackToPreviousPage = () => router.back();
@@ -173,10 +176,11 @@ function DoodleBoard() {
         customColor={customColor}
         chooseCustomColor={setCustomColor}
         useEraser={useEraser}
-        deleteDrawing={deleteDrawing}
+        deleteDrawing={setIsDialogOpen}
         undoLine={undoLine}
         changeStrokeColor={changeStrokeColor}
       />
+      <DeleteDialog zIndex={100} isOpen={isDialogOpen} onClose={setIsDialogOpen} deleteDrawing={deleteDrawing} />
     </>
   );
 }

@@ -5,10 +5,10 @@ import * as htmlToImage from 'html-to-image';
 import * as React from 'react';
 import { Download } from 'react-feather';
 import styled, { css } from 'styled-components';
-import { BREAKPOINT_SIZES, NORD_THEME } from '../../constants';
-import type { DrawEventHandler } from './shared';
-import ColorBlocks from './Toolbar/ColorBlocks';
-import CustomColor from './Toolbar/CustomColor';
+import { BREAKPOINT_SIZES, NORD_THEME } from '../../../constants';
+import type { DrawEventHandler } from '../shared';
+import ColorBlocks from './ColorBlocks';
+import CustomColor from './CustomColor';
 
 interface ToolbarProps {
   isDrawing: boolean;
