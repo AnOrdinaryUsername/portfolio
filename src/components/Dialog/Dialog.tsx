@@ -33,13 +33,12 @@ const Wrapper = styled.div<RevealDialog>`
   position: fixed;
   inset: 0px;
   overflow: auto;
-  z-index: 1;
   display: flex;
   visibility: ${(p) => !p.reveal && 'hidden'};
   align-items: center;
   justify-content: center;
   background: transparent;
-  z-index: ${(p) => p.zIndex ?? 'auto'};
+  z-index: ${(p) => p.zIndex ?? '1'};
 `;
 
 const Overlay = styled.div`

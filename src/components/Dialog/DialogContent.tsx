@@ -13,7 +13,7 @@ const Info = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.4rem;
-  padding: 3.2rem;
+  padding: 2.4rem;
 
   @media ${(p) => p.theme.breakpoints.sm} {
     padding: 4.8rem;
