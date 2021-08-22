@@ -6,7 +6,7 @@ import links from './links';
 import NavItem from './NavItem';
 
 interface MobileNavProps {
-  id: string;
+  id?: string;
   isActive: boolean;
   toggleMenu?: React.MouseEventHandler<HTMLButtonElement | HTMLDivElement>;
 }
