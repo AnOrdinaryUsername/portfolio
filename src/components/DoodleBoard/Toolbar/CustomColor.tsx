@@ -3,34 +3,31 @@ import { HexColorInput, HexColorPicker } from 'react-colorful';
 import styled from 'styled-components';
 
 interface CustomColorProps {
+  hidden: boolean;
   isToolbarActive: boolean;
   colorBoxWithFocus: string;
   customColor: string;
-  updateColorAndOutline: React.MouseEventHandler<HTMLDivElement & HTMLButtonElement> &
-    React.TouchEventHandler<HTMLDivElement>;
-  chooseCustomColor: React.Dispatch<React.SetStateAction<string>>;
+  changeStrokeColor: React.MouseEventHandler<HTMLButtonElement>;
+  chooseCustomColor: (newColor: string) => void;
 }
 
 function CustomColor({
+  hidden,
   isToolbarActive,
   colorBoxWithFocus,
   customColor,
-  updateColorAndOutline,
+  changeStrokeColor,
   chooseCustomColor,
 }: CustomColorProps) {
   return (
-    <CustomColorWrapper>
-      <HexColorPicker
-        tabIndex={isToolbarActive ? 0 : -1}
-        color={customColor}
-        onChange={chooseCustomColor}
-      />
+    <CustomColorWrapper isHidden={hidden}>
+      <HexColorPicker color={customColor} onChange={chooseCustomColor} />
       <CustomColorInput>
         <CustomColorButton
           tabIndex={isToolbarActive ? 0 : -1}
           isInFocus={customColor === colorBoxWithFocus}
           id={customColor}
-          onClick={updateColorAndOutline}
+          onClick={changeStrokeColor}
           aria-label={`Use the color ${customColor}`}
           color={customColor}
         />
@@ -45,12 +42,17 @@ function CustomColor({
   );
 }
 
-const CustomColorWrapper = styled.div`
+interface Visibility {
+  isHidden: boolean;
+}
+
+const CustomColorWrapper = styled.div<Visibility>`
   grid-area: custom-color;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   max-width: 20rem;
+  visibility: ${(p) => (p.isHidden ? 'hidden' : 'initial')};
 
   & > .react-colorful {
     height: 13rem;

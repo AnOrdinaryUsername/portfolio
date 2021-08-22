@@ -8,17 +8,19 @@ import links from './links';
 import NavItem from './NavItem';
 
 interface DesktopNavProps {
+  isExpanded: boolean;
+  ariaControls: string;
   toggleMenu: React.MouseEventHandler<HTMLButtonElement>;
   isSmallerThanDesktop: boolean;
 }
 
 const DynamicDarkModeButton = dynamic(() => import('./DarkModeButton'), { ssr: false });
 
-function DesktopNav({ toggleMenu, isSmallerThanDesktop }: DesktopNavProps) {
+function DesktopNav({ isExpanded, ariaControls, toggleMenu, isSmallerThanDesktop }: DesktopNavProps) {
   const logoHeight = isSmallerThanDesktop ? '40' : '45';
 
   const smallNav = (
-    <OpenMenuButton onClick={toggleMenu} aria-label="Open menu">
+    <OpenMenuButton onClick={toggleMenu} aria-controls={ariaControls} aria-expanded={isExpanded} aria-label="Open menu">
       <Menu height="40" />
     </OpenMenuButton>
   );

@@ -19,7 +19,6 @@ function Drawing({ lines }: DrawingProps) {
 const Svg = styled.svg`
   width: 100%;
   height: 100%;
-  background: inherit;
 `;
 
 interface DrawingLineProps {
@@ -49,6 +48,8 @@ const Stroke = styled.path<StrokeProps>`
   stroke: ${(p) => p.strokeSettings.color};
   stroke-linejoin: round;
   stroke-linecap: round;
+  mix-blend-mode: ${(p) => p.strokeSettings.blendMode};
+  opacity: ${(p) => p.strokeSettings.opacity};
 `;
 
 export default Drawing;

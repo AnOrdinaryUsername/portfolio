@@ -6,17 +6,18 @@ import links from './links';
 import NavItem from './NavItem';
 
 interface MobileNavProps {
+  id: string;
   isActive: boolean;
   toggleMenu?: React.MouseEventHandler<HTMLButtonElement | HTMLDivElement>;
 }
 
 const DynamicDarkModeButton = dynamic(() => import('./DarkModeButton'), { ssr: false });
 
-function MobileNav({ isActive, toggleMenu }: MobileNavProps) {
+function MobileNav({ id, isActive, toggleMenu }: MobileNavProps) {
   return (
     <div>
       <Overlay onClick={toggleMenu} isActive={isActive} />
-      <Wrapper isActive={isActive}>
+      <Wrapper id={id} isActive={isActive}>
         <CloseMenuButton aria-label="Close menu" onClick={toggleMenu}>
           <Close height="40" />
         </CloseMenuButton>

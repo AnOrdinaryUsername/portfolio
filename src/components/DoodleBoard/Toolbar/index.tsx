@@ -6,9 +6,10 @@ import * as React from 'react';
 import { Download } from 'react-feather';
 import styled, { css } from 'styled-components';
 import { BREAKPOINT_SIZES, NORD_THEME } from '../../../constants';
-import type { DrawEventHandler } from '../shared';
 import ColorBlocks from './ColorBlocks';
 import CustomColor from './CustomColor';
+
+const TRANSITION_OUT_TIME = 350; // in miliseconds
 
 interface ToolbarProps {
   isDrawing: boolean;
@@ -19,7 +20,7 @@ interface ToolbarProps {
   deleteDrawing: React.MouseEventHandler<HTMLButtonElement>;
   undoLine: React.MouseEventHandler<HTMLButtonElement>;
   useEraser: React.MouseEventHandler<HTMLButtonElement>;
-  changeStrokeColor: DrawEventHandler;
+  changeStrokeColor: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function Toolbar({
@@ -34,25 +35,37 @@ function Toolbar({
   changeStrokeColor,
 }: ToolbarProps) {
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
+
   const [isToolbarActive, setIsToolbarActive] = useToggle();
+  const [hasTransitionedOut, setHasTransitionedOut] = React.useState<boolean>(true);
   const [colorBoxWithFocus, setColorBoxWithFocus] = React.useState<string>('#2b2b2b');
+
   const { width } = useWindowSize();
   const isSmallerThanDesktop = width < BREAKPOINT_SIZES.lg;
 
-  const updateColorAndOutline = (
-    event: React.MouseEvent<HTMLDivElement & HTMLButtonElement> & React.TouchEvent<HTMLDivElement>
-  ) => {
-    const selectedColorBox = event.currentTarget.id;
+  const toggleToolbar = () => {
+    setIsToolbarActive();
 
-    if (colorBoxWithFocus !== selectedColorBox) {
-      setColorBoxWithFocus(selectedColorBox);
-      changeStrokeColor(event);
+    // Change the CustomColor component's visibility depending on
+    // whether or not the toolbar has slided outside of viewport.
+    if (!hasTransitionedOut) {
+      // After 350ms, change CustomColor visibility to hidden to prevent tabbing.
+      setTimeout(() => setHasTransitionedOut(true), TRANSITION_OUT_TIME);
+    } else {
+      // Changes CustomColor visibility to initial.
+      setHasTransitionedOut(false);
     }
   };
 
   React.useEffect(() => {
+    if (colorBoxWithFocus !== currentColor) {
+      setColorBoxWithFocus(currentColor);
+    }
+  }, [currentColor, colorBoxWithFocus, setColorBoxWithFocus]);
+
+  React.useEffect(() => {
     /* When the user isn't drawing, convert the current drawing to
-     *  a png and add it to the Download icon href in the toolbar.
+     *  a png and add it to the Download icon's href.
      */
     if (!isDrawing) {
       if (!divRef.current) {
@@ -86,28 +99,33 @@ function Toolbar({
           <CurrentColor color={currentColor} aria-label={`Your current color is ${currentColor}`} />
         </>
       )}
-      <Wrapper isToolbarActive={isToolbarActive} role="toolbar">
+      <Wrapper
+        isToolbarActive={isToolbarActive}
+        aria-controls="content"
+        aria-expanded={isToolbarActive}
+        role="toolbar"
+      >
         <Flap>
           <RevealToolbarButton
-            role="tab"
             aria-label={isToolbarActive ? 'Hide toolbar' : 'Reveal toolbar'}
-            onClick={setIsToolbarActive}
+            onClick={toggleToolbar}
           >
             <ChevronUp height="50" />
           </RevealToolbarButton>
         </Flap>
-        <Content aria-hidden={!isToolbarActive}>
+        <Content id="content">
           <ColorBlocks
             isToolbarActive={isToolbarActive}
             colorBoxWithFocus={colorBoxWithFocus}
-            updateColorAndOutline={updateColorAndOutline}
+            changeStrokeColor={changeStrokeColor}
           />
           <CustomColor
+            hidden={hasTransitionedOut}
             customColor={customColor}
             chooseCustomColor={chooseCustomColor}
             isToolbarActive={isToolbarActive}
             colorBoxWithFocus={colorBoxWithFocus}
-            updateColorAndOutline={updateColorAndOutline}
+            changeStrokeColor={changeStrokeColor}
           />
           <ButtonsWrapper>
             <IconButton
@@ -157,7 +175,7 @@ const Wrapper = styled.div<WrapperProps>`
   border-top-right-radius: 4px;
   background: hsl(225, 22%, 91%);
   /* Toolbar slides out */
-  transition: transform 350ms ease-in;
+  transition: ${`transform ${TRANSITION_OUT_TIME}ms ease-in`};
 
   @media ${(p) => p.theme.breakpoints.sm} {
     max-width: 80rem;

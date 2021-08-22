@@ -1,7 +1,6 @@
 import VisuallyHidden from 'components/VisuallyHidden';
 import * as React from 'react';
 import styled from 'styled-components';
-import type { DrawEventHandler } from '../shared';
 
 export interface Color {
   hexColorCode: string;
@@ -9,7 +8,7 @@ export interface Color {
 }
 
 interface ColorPickerProps extends Color {
-  onSelectColor: DrawEventHandler;
+  onSelectColor: React.MouseEventHandler<HTMLButtonElement>;
   tabIndex: number;
   isInFocus: boolean;
 }
@@ -39,7 +38,7 @@ interface ColoredSquareProps {
   isInFocus: boolean;
 }
 
-const ColoredSquare = styled.div<ColoredSquareProps>`
+const ColoredSquare = styled.button<ColoredSquareProps>`
   width: 5rem;
   height: 5rem;
   background: ${(p) => p.boxColor};

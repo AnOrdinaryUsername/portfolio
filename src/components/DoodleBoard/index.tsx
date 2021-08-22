@@ -1,28 +1,45 @@
 import { sharedButtonStyles } from 'components/Buttons';
 import { ArrowLeft } from 'components/Svgs/Icons';
+import { useToggle } from 'hooks';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
 import { NORD_THEME } from '../../constants';
+import { DeleteDialog } from './Dialog';
 import Drawing from './Drawing';
 import type { DrawEvent, Paths, StrokeSettings } from './shared';
 import Toolbar from './Toolbar/';
-import { DeleteDialog } from './Dialog';
-import { useToggle } from 'hooks';
 
 const defaultSettings: StrokeSettings = {
   isSolidLine: true,
   strokeWidth: 10,
   color: 'black',
+  opacity: 1,
+  blendMode: 'multiply',
 };
 
 function DoodleBoard() {
+  /* Refs
+      boardRef -> To grab the drawing boards clientRect for calculating coordinates
+      divRef -> To grab an image of the drawing
+  */
   const boardRef = React.useRef<HTMLDivElement>(null);
+  const divRef = React.useRef<HTMLDivElement>(null);
+
+  /* Drawing
+      isDrawing -> Flag for when the user is currently drawing or not (touchend or mouseup)
+      lines -> Contains all the cartesian coordinates for drawing lines in the form of SVG paths
+  */
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
   const [lines, setLines] = React.useState<Paths[][]>([]);
+
+  /* Stroke properties
+      strokeSettings -> Settings for SVG stroke properties
+      customColor -> Get value of react-colorful onChange color
+  */
   const [strokeSettings, setStrokeSettings] = React.useState<StrokeSettings>(defaultSettings);
   const [customColor, setCustomColor] = React.useState<string>('#2b2b2b');
-  const divRef = React.useRef<HTMLDivElement>(null);
+
   const [isDialogOpen, setIsDialogOpen] = useToggle();
   const router = useRouter();
 
@@ -89,7 +106,7 @@ function DoodleBoard() {
     });
   };
 
-  const changeStrokeColor = (event: DrawEvent) => {
+  const changeStrokeColor = (event: React.MouseEvent<HTMLButtonElement>) => {
     const newStrokeColor = event.currentTarget.id;
     setStrokeSettings((prevState) => ({
       ...prevState,
@@ -101,6 +118,7 @@ function DoodleBoard() {
   const useEraser = () => {
     setStrokeSettings((prevState) => ({
       ...prevState,
+      blendMode: 'normal',
       color: '#FFFFFF',
     }));
   };
@@ -112,7 +130,6 @@ function DoodleBoard() {
   const undoLine = () => {
     setLines((prevState) => {
       const drawing = [...prevState];
-      const lastPath = drawing.length - 1;
 
       /* The below code removes each point from a line. 
       * If you want to include it, uncomment this block.
@@ -174,13 +191,18 @@ function DoodleBoard() {
         isDrawing={isDrawing}
         divRef={divRef}
         customColor={customColor}
-        chooseCustomColor={setCustomColor}
+        chooseCustomColor={(event) => setCustomColor(event)}
         useEraser={useEraser}
         deleteDrawing={setIsDialogOpen}
         undoLine={undoLine}
         changeStrokeColor={changeStrokeColor}
       />
-      <DeleteDialog zIndex={100} isOpen={isDialogOpen} onClose={setIsDialogOpen} deleteDrawing={deleteDrawing} />
+      <DeleteDialog
+        zIndex={100}
+        isOpen={isDialogOpen}
+        onClose={setIsDialogOpen}
+        deleteDrawing={deleteDrawing}
+      />
     </>
   );
 }
@@ -200,6 +222,7 @@ const DrawingBoard = styled.div`
 const DrawingWrapper = styled.div`
   height: 100%;
   width: 100%;
+  background: inherit;
 `;
 
 const BackButton = styled.button`

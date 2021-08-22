@@ -14,6 +14,7 @@ function MainLayout({ children }: MainLayoutProps) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useToggle();
   const { width } = useWindowSize();
   const isSmallerThanDesktop = width < BREAKPOINT_SIZES.med;
+  const id = "navigation";
 
   React.useEffect(() => {
     if (isMobileNavOpen) {
@@ -24,11 +25,11 @@ function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
       <GlobalStyle isMobileNavOpen={isMobileNavOpen} />
-      <DesktopNav toggleMenu={setIsMobileNavOpen} isSmallerThanDesktop={isSmallerThanDesktop} />
+      <DesktopNav ariaControls={id} isExpanded={isMobileNavOpen} toggleMenu={setIsMobileNavOpen} isSmallerThanDesktop={isSmallerThanDesktop} />
       <Layout>{children}</Layout>
       <Footer />
       {isSmallerThanDesktop && (
-        <MobileNav toggleMenu={setIsMobileNavOpen} isActive={isMobileNavOpen} />
+        <MobileNav id={id} toggleMenu={setIsMobileNavOpen} isActive={isMobileNavOpen} />
       )}
     </>
   );

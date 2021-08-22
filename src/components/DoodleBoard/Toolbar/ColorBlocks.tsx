@@ -6,14 +6,13 @@ import colors from './colors';
 interface ColorBlocksProps {
   isToolbarActive: boolean;
   colorBoxWithFocus: string;
-  updateColorAndOutline: React.MouseEventHandler<HTMLDivElement & HTMLButtonElement> &
-    React.TouchEventHandler<HTMLDivElement>;
+  changeStrokeColor: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function ColorBlocks({
   isToolbarActive,
   colorBoxWithFocus,
-  updateColorAndOutline,
+  changeStrokeColor,
 }: ColorBlocksProps) {
   return (
     <ColorsWrapper>
@@ -21,7 +20,7 @@ function ColorBlocks({
         <ColorPicker
           tabIndex={isToolbarActive ? 0 : -1}
           isInFocus={props.hexColorCode === colorBoxWithFocus}
-          onSelectColor={updateColorAndOutline}
+          onSelectColor={changeStrokeColor}
           {...props}
           key={index}
         />
