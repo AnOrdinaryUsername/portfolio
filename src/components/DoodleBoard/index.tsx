@@ -1,10 +1,7 @@
-import { sharedButtonStyles } from 'components/Buttons';
-import { ArrowLeft } from 'components/Svgs/Icons';
 import { useToggle } from 'hooks';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
-import { NORD_THEME } from '../../constants';
 import { DeleteDialog } from './Dialog';
 import Drawing from './Drawing';
 import type { DrawEvent, Paths, StrokeSettings } from './shared';
@@ -106,6 +103,15 @@ function DoodleBoard() {
     });
   };
 
+  const updateStrokeSettings = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    setStrokeSettings((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const changeStrokeColor = (event: React.MouseEvent<HTMLButtonElement>) => {
     const newStrokeColor = event.currentTarget.id;
     setStrokeSettings((prevState) => ({
@@ -178,20 +184,20 @@ function DoodleBoard() {
         onTouchStart={getStartingPoint}
         onTouchMove={createPath}
       >
-        <BackButton onClick={goBackToPreviousPage}>
-          <ArrowLeft height="20" />
-          Go Back
-        </BackButton>
         <DrawingWrapper ref={divRef}>
           <Drawing lines={lines} />
         </DrawingWrapper>
       </DrawingBoard>
       <Toolbar
+        opacity={strokeSettings.opacity}
+        strokeWidth={strokeSettings.strokeWidth}
         currentColor={strokeSettings.color}
         isDrawing={isDrawing}
         divRef={divRef}
         customColor={customColor}
+        updateStrokeSettings={updateStrokeSettings}
         chooseCustomColor={(event) => setCustomColor(event)}
+        goBack={goBackToPreviousPage}
         useEraser={useEraser}
         deleteDrawing={setIsDialogOpen}
         undoLine={undoLine}
@@ -223,25 +229,6 @@ const DrawingWrapper = styled.div`
   height: 100%;
   width: 100%;
   background: inherit;
-`;
-
-const BackButton = styled.button`
-  ${sharedButtonStyles}
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  padding: 1rem 1.6rem;
-  margin: 2.4rem;
-  user-select: none;
-  color: ${NORD_THEME.nord3};
-  background: hsl(225, 22%, 91%);
-  border-radius: 75px;
-
-  & > *:first-child {
-    align-self: flex-end;
-    margin-right: 0.6rem;
-  }
 `;
 
 export default DoodleBoard;

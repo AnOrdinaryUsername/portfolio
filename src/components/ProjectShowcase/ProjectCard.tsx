@@ -151,8 +151,12 @@ const Placard = styled.div<Reverse>`
 const PlacardDetails = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 35rem;
-  padding: 3.6rem;
+  min-height: 30rem;
+  padding: 2.4rem;
+
+  @media ${(p) => p.theme.breakpoints.sm} {
+    padding: 3.6rem;
+  }
 
   @media ${(p) => p.theme.breakpoints.med} {
     padding: 4.8rem;

@@ -1,5 +1,5 @@
 import { sharedButtonStyles } from 'components/Buttons';
-import { ChevronUp, Eraser, Trash, UndoArrow } from 'components/Svgs/Icons';
+import { ArrowLeft, ChevronUp, Eraser, Trash, UndoArrow } from 'components/Svgs/Icons';
 import { useToggle, useWindowSize } from 'hooks';
 import * as htmlToImage from 'html-to-image';
 import * as React from 'react';
@@ -8,14 +8,17 @@ import styled, { css } from 'styled-components';
 import { BREAKPOINT_SIZES, NORD_THEME } from '../../../constants';
 import ColorBlocks from './ColorBlocks';
 import CustomColor from './CustomColor';
+import type { StrokeInputsProps } from './StrokeInputs';
+import StrokeInputs from './StrokeInputs';
 
 const TRANSITION_OUT_TIME = 350; // in miliseconds
 
-interface ToolbarProps {
+interface ToolbarProps extends Omit<StrokeInputsProps, 'isToolbarActive'> {
   isDrawing: boolean;
   divRef: React.RefObject<HTMLDivElement>;
   currentColor: string;
   customColor: string;
+  goBack: React.MouseEventHandler<HTMLButtonElement>;
   chooseCustomColor: React.Dispatch<React.SetStateAction<string>>;
   deleteDrawing: React.MouseEventHandler<HTMLButtonElement>;
   undoLine: React.MouseEventHandler<HTMLButtonElement>;
@@ -28,6 +31,10 @@ function Toolbar({
   divRef,
   currentColor,
   customColor,
+  opacity,
+  strokeWidth,
+  updateStrokeSettings,
+  goBack,
   chooseCustomColor,
   useEraser,
   deleteDrawing,
@@ -88,6 +95,10 @@ function Toolbar({
 
   return (
     <>
+      <BackButton onClick={goBack}>
+        <ArrowLeft height="20" />
+        Go Back
+      </BackButton>
       {isSmallerThanDesktop && (
         <>
           <MobileIconButton align="left" onClick={useEraser} aria-label="Use eraser">
@@ -126,6 +137,12 @@ function Toolbar({
             isToolbarActive={isToolbarActive}
             colorBoxWithFocus={colorBoxWithFocus}
             changeStrokeColor={changeStrokeColor}
+          />
+          <StrokeInputs
+            opacity={opacity}
+            strokeWidth={strokeWidth}
+            isToolbarActive={isToolbarActive}
+            updateStrokeSettings={updateStrokeSettings}
           />
           <ButtonsWrapper>
             <IconButton
@@ -178,7 +195,7 @@ const Wrapper = styled.div<WrapperProps>`
   transition: ${`transform ${TRANSITION_OUT_TIME}ms ease-in`};
 
   @media ${(p) => p.theme.breakpoints.sm} {
-    max-width: 80rem;
+    max-width: 100rem;
   }
 
   @media ${(p) => p.theme.breakpoints.lg} {
@@ -232,8 +249,8 @@ const Content = styled.div`
 
   @media ${(p) => p.theme.breakpoints.lg} {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: 'colors custom-color buttons';
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 'colors custom-color inputs buttons';
     justify-items: center;
   }
 `;
@@ -248,6 +265,25 @@ const ButtonsWrapper = styled.div`
 
   @media ${(p) => p.theme.breakpoints.lg} {
     grid-template-columns: repeat(5, 1fr);
+  }
+`;
+
+const BackButton = styled.button`
+  ${sharedButtonStyles}
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  padding: 1rem 1.6rem;
+  margin: 2.4rem;
+  user-select: none;
+  color: ${NORD_THEME.nord3};
+  background: hsl(225, 22%, 91%);
+  border-radius: 75px;
+
+  & > *:first-child {
+    align-self: flex-end;
+    margin-right: 0.6rem;
   }
 `;
 
