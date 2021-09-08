@@ -1,6 +1,6 @@
 import { sharedButtonStyles } from 'components/Buttons';
 import { ArrowLeft, ChevronUp, Eraser, Trash, UndoArrow } from 'components/Svgs/Icons';
-import { useToggle, useWindowSize } from 'hooks';
+import { useKeyboardCombo, useToggle, useWindowSize } from 'hooks';
 import * as htmlToImage from 'html-to-image';
 import * as React from 'react';
 import { Download } from 'react-feather';
@@ -63,6 +63,8 @@ function Toolbar({
       setHasTransitionedOut(false);
     }
   };
+
+  useKeyboardCombo(['Escape'], toggleToolbar);
 
   React.useEffect(() => {
     if (colorBoxWithFocus !== currentColor) {

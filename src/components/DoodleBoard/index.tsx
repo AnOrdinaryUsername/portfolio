@@ -1,4 +1,4 @@
-import { useToggle } from 'hooks';
+import { useKeyboardCombo, useToggle } from 'hooks';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
@@ -37,7 +37,7 @@ function DoodleBoard() {
   const [strokeSettings, setStrokeSettings] = React.useState<StrokeSettings>(defaultSettings);
   const [customColor, setCustomColor] = React.useState<string>('#2b2b2b');
 
-  const [isDialogOpen, setIsDialogOpen] = useToggle();
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useToggle();
   const router = useRouter();
 
   const goBackToPreviousPage = () => router.back();
@@ -154,6 +154,10 @@ function DoodleBoard() {
     });
   };
 
+  useKeyboardCombo(['control', 'z'], undoLine, { allowRepeatAction: true, repeatKeys: 'z' });
+  useKeyboardCombo(['delete'], setIsDeleteDialogOpen);
+  useKeyboardCombo(['e'], useEraser);
+
   React.useEffect(() => {
     setStrokeSettings((prevState) => ({
       ...prevState,
@@ -199,14 +203,14 @@ function DoodleBoard() {
         chooseCustomColor={(event) => setCustomColor(event)}
         goBack={goBackToPreviousPage}
         useEraser={useEraser}
-        deleteDrawing={setIsDialogOpen}
+        deleteDrawing={setIsDeleteDialogOpen}
         undoLine={undoLine}
         changeStrokeColor={changeStrokeColor}
       />
       <DeleteDialog
         zIndex={100}
-        isOpen={isDialogOpen}
-        onClose={setIsDialogOpen}
+        isOpen={isDeleteDialogOpen}
+        onClose={setIsDeleteDialogOpen}
         deleteDrawing={deleteDrawing}
       />
     </>
