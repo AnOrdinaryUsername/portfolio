@@ -16,7 +16,7 @@ const Info = styled.div`
   padding: 2.4rem;
 
   @media ${(p) => p.theme.breakpoints.sm} {
-    padding: 4.8rem;
+    padding: 4rem;
   }
 `;
 

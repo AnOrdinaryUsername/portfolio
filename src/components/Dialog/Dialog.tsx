@@ -55,7 +55,7 @@ const Overlay = styled.div`
 const dialogEnter = keyframes`
   from {
       opacity: 0;
-      transform: translateY(2rem);
+      transform: translateY(1.2rem);
   }
 `;
 

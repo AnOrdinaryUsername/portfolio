@@ -46,10 +46,10 @@ function Doodle() {
               </DialogText>
             </DialogContent>
             <DialogOptions>
-              <SecondaryButton style={{ padding: '1.2rem 2rem' }} onClick={goBackToPreviousPage}>
+              <SecondaryButton style={{ padding: '0.8rem 1.6rem' }} onClick={goBackToPreviousPage}>
                 Take me back!
               </SecondaryButton>
-              <PrimaryButton style={{ padding: '1.2rem 2rem' }} onClick={setIsDialogOpen}>
+              <PrimaryButton style={{ padding: '0.8rem 1.6rem' }} onClick={setIsDialogOpen}>
                 I&apos;ll take my chances
               </PrimaryButton>
             </DialogOptions>

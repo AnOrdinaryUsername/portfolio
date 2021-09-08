@@ -27,7 +27,7 @@ const Options = styled.div`
     flex-direction: row;
     align-items: baseline;
     justify-content: flex-end;
-    padding: 3.2rem;
+    padding: 2.4rem 4rem;
 
     & > *:first-child {
       margin-right: 1.6rem;
