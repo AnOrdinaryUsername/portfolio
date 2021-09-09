@@ -26,9 +26,11 @@ function DoodleBoard() {
   /* Drawing
       isDrawing -> Flag for when the user is currently drawing or not (touchend or mouseup)
       lines -> Contains all the cartesian coordinates for drawing lines in the form of SVG paths
+      trash -> Contains lines that have been undone
   */
   const [isDrawing, setIsDrawing] = React.useState<boolean>(false);
   const [lines, setLines] = React.useState<Paths[][]>([]);
+  const [trash, setTrash] = React.useState<Paths[]>([]);
 
   /* Stroke properties
       strokeSettings -> Settings for SVG stroke properties
@@ -93,6 +95,10 @@ function DoodleBoard() {
       return;
     }
 
+    if (trash.length !== 0) {
+      setTrash([]);
+    }
+
     const point = grabCoordinates(event);
 
     setLines((prevState) => {
@@ -147,14 +153,39 @@ function DoodleBoard() {
 
       // Remove the last path made in its entirety
       if (drawing.length !== 0) {
-        drawing.pop();
+        const undoneLine = drawing.pop();
+
+        if (undoneLine) {
+          setTrash((prevState) => [...prevState, ...undoneLine]);
+        }
       }
 
       return drawing;
     });
   };
 
+  const redoLine = () => {
+    if (trash.length === 0) {
+      return;
+    }
+
+    let oldLine: Paths;
+
+    setTrash((prevState) => {
+      const copiedArray = [...prevState];
+
+      if (copiedArray.length !== 0) {
+        oldLine = trash.pop()!;
+      }
+
+      return copiedArray;
+    });
+
+    setLines((prevState) => [...prevState, [oldLine]]);
+  };
+
   useKeyboardCombo(['control', 'z'], undoLine, { allowRepeatAction: true, repeatKeys: 'z' });
+  useKeyboardCombo(['control', 'y'], redoLine, { allowRepeatAction: true, repeatKeys: 'y' });
   useKeyboardCombo(['delete'], setIsDeleteDialogOpen);
   useKeyboardCombo(['e'], useEraser);
 
