@@ -18,5 +18,5 @@ export type StrokeSettings = {
   color: string;
   strokeWidth: number;
   opacity: number;
-  blendMode: string;
+  blendMode: 'normal' | 'multiply';
 };

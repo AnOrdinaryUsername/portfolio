@@ -140,25 +140,15 @@ function DoodleBoard() {
   };
 
   const undoLine = () => {
+    if (lines.length === 0) {
+      return;
+    }
+
     setLines((prevState) => {
       const drawing = [...prevState];
 
-      /* The below code removes each point from a line. 
-      * If you want to include it, uncomment this block.
-
-      if (drawing[lastPath][0].points.length !== 0) {
-        drawing[lastPath][0].points.pop();
-      }
-      */
-
-      // Remove the last path made in its entirety
-      if (drawing.length !== 0) {
-        const undoneLine = drawing.pop();
-
-        if (undoneLine) {
-          setTrash((prevState) => [...prevState, ...undoneLine]);
-        }
-      }
+      const lastLineMade = drawing.pop()!;
+      setTrash((prevTrashState) => [...prevTrashState, lastLineMade[0]]);
 
       return drawing;
     });
@@ -169,19 +159,14 @@ function DoodleBoard() {
       return;
     }
 
-    let oldLine: Paths;
+    setTrash((prevTrashState) => {
+      const undoneLines = [...prevTrashState];
 
-    setTrash((prevState) => {
-      const copiedArray = [...prevState];
+      const lastUndoneLine = undoneLines.pop()!;
+      setLines((prevLinesState) => [...prevLinesState, [lastUndoneLine]]);
 
-      if (copiedArray.length !== 0) {
-        oldLine = trash.pop()!;
-      }
-
-      return copiedArray;
+      return undoneLines;
     });
-
-    setLines((prevState) => [...prevState, [oldLine]]);
   };
 
   useKeyboardCombo(['control', 'z'], undoLine, { allowRepeatAction: true, repeatKeys: 'z' });
