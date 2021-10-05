@@ -1,9 +1,8 @@
-import { Moon, Sun } from 'components/Svgs/Icons';
 import { useToggle } from 'hooks';
 import * as React from 'react';
+import { Moon, Sun } from 'react-feather';
 import styled from 'styled-components';
 import { COLORS } from '../../constants';
-import { Wrapper as DesktopNavWrapper } from './DesktopNav';
 
 function changeColorMode(currentMode: 'dark' | 'light') {
   const root = document.documentElement;
@@ -28,9 +27,14 @@ function changeColorMode(currentMode: 'dark' | 'light') {
 }
 
 function DarkModeButton() {
-  const initialTheme = window.localStorage.getItem('color-mode') ?? 'dark';
-  const mode = initialTheme === 'dark' ? true : false;
-  const [isDarkMode, setIsDarkMode] = useToggle(mode);
+  const [isDarkMode, setIsDarkMode] = useToggle(true);
+
+  React.useEffect(() => {
+    const initialTheme = window.localStorage.getItem('color-mode');
+    if (initialTheme === 'light') {
+      setIsDarkMode();
+    }
+  }, []);
 
   React.useEffect(() => {
     const theme = isDarkMode ? 'light' : 'dark';
@@ -42,7 +46,7 @@ function DarkModeButton() {
       onClick={setIsDarkMode}
       aria-label={isDarkMode ? 'Activate light mode' : 'Activate dark mode'}
     >
-      {isDarkMode ? <Sun /> : <Moon />}
+      {isDarkMode ? <Sun strokeWidth={1.5} /> : <Moon strokeWidth={1.5} />}
     </Button>
   );
 }
@@ -54,10 +58,6 @@ const Button = styled.button`
 
   &:hover {
     background-color: var(--bg-secondary);
-  }
-
-  ${DesktopNavWrapper} & {
-    margin-left: 3.2rem;
   }
 `;
 
