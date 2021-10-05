@@ -1,12 +1,11 @@
 import type { CustomSvgProps } from '../shared';
 
-function GithubLogo({ fillColor, height }: CustomSvgProps) {
-  const DEFAULT_HEIGHT = '128';
-  const DEFAULT_COLOR = 'var(--icon-color)';
+function GithubLogo({ fill, size }: CustomSvgProps) {
+  const DEFAULT_SIZE = '128';
 
   return (
-    <svg viewBox="0 0 128 128" height={height ?? DEFAULT_HEIGHT}>
-      <g fill={fillColor ?? DEFAULT_COLOR}>
+    <svg viewBox="0 0 128 128" height={size ?? DEFAULT_SIZE}>
+      <g fill={fill ?? 'currentColor'}>
         <path
           fillRule="evenodd"
           clipRule="evenodd"

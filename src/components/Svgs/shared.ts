@@ -1,6 +1,7 @@
 export interface CustomSvgProps {
   className?: string;
-  fillColor?: string;
-  height?: string;
+  fill?: string;
+  size?: string | number | undefined;
   width?: string;
+  height?: string;
 }

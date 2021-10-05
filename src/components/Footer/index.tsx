@@ -18,7 +18,7 @@ function Footer() {
           <LinksWrapper>
             <Link href="/" passHref={true}>
               <AnchorLink aria-label="Go to homepage">
-                <Logo height="40" />
+                <Logo />
               </AnchorLink>
             </Link>
             <SocialLinks>
@@ -28,7 +28,7 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <GithubLogo height="25" />
+                <GithubLogo size="25" />
               </AnchorLink>
               <AnchorLink
                 aria-label="My Discord profile"
@@ -36,7 +36,7 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <DiscordLogo height="20" />
+                <DiscordLogo size="20" />
               </AnchorLink>
             </SocialLinks>
           </LinksWrapper>

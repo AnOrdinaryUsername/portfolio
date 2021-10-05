@@ -1,11 +1,11 @@
 import type { CustomSvgProps } from '../shared';
 
-function DiscordLogo({ height }: CustomSvgProps) {
-  const DEFAULT_HEIGHT = '55';
+function DiscordLogo({ size }: CustomSvgProps) {
+  const DEFAULT_SIZE = '55';
 
   return (
     <svg
-      height={height ?? DEFAULT_HEIGHT}
+      height={size ?? DEFAULT_SIZE}
       viewBox="0 0 71 55"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

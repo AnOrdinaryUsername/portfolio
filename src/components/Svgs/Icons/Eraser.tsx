@@ -2,12 +2,12 @@ import { CustomSvgProps } from '../shared';
 
 /**
  * SVG eraser icon made by FontAwesome.
- * 
+ *
  * License:
  * https://fontawesome.com/license
  */
-function Eraser({ height }: CustomSvgProps) {
-  const DEFAULT_HEIGHT = '512';
+function Eraser({ size }: CustomSvgProps) {
+  const DEFAULT_SIZE = '512';
 
   return (
     <svg
@@ -18,7 +18,7 @@ function Eraser({ height }: CustomSvgProps) {
       className="svg-inline--fa fa-eraser fa-w-16"
       role="img"
       xmlns="http://www.w3.org/2000/svg"
-      height={height ?? DEFAULT_HEIGHT}
+      height={size ?? DEFAULT_SIZE}
       viewBox="0 0 512 512"
     >
       <path

@@ -1,11 +1,12 @@
-import { CustomSvgProps } from 'components/Svgs/shared';
+import { LogoAnchor as HeaderLogoAnchor } from 'components/Navigation/DesktopNav';
+import styled from 'styled-components';
+import { CustomSvgProps } from '../shared';
 
-function Logo({ height }: CustomSvgProps) {
-  const DEFAULT_HEIGHT = '96';
-
+function Logo({ className }: CustomSvgProps) {
   return (
-    <svg
-      height={height ?? DEFAULT_HEIGHT}
+    <Svg
+      className={className}
+      height="96"
       viewBox="0 0 205 96"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -117,8 +118,18 @@ function Logo({ height }: CustomSvgProps) {
           <feBlend mode="normal" in2="shape" result="effect1_innerShadow" />
         </filter>
       </defs>
-    </svg>
+    </Svg>
   );
 }
+
+const Svg = styled.svg`
+  height: 4rem;
+
+  @media ${(p) => p.theme.breakpoints.med} {
+    ${HeaderLogoAnchor} & {
+      height: 4.5rem;
+    }
+  }
+`;
 
 export default Logo;

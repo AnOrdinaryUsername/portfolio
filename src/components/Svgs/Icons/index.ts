@@ -1,14 +1,4 @@
-export { default as ArrowLeft } from './ArrowLeft';
-export { default as ChevronUp } from './ChevronUp';
-export { default as Close } from './Close';
 export { default as DiscordLogo } from './DiscordLogo';
 export { default as Eraser } from './Eraser';
-export { default as ExternalLink } from './ExternalLink';
 export { default as GithubLogo } from './GithubLogo';
 export { default as Logo } from './Logo';
-export { default as Menu } from './Menu';
-export { default as Moon } from './Moon';
-export { default as RedoArrow } from './RedoArrow';
-export { default as Sun } from './Sun';
-export { default as Trash } from './Trash';
-export { default as UndoArrow } from './UndoArrow';
