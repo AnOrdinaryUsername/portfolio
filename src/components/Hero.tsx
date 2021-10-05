@@ -7,10 +7,10 @@ import styled from 'styled-components';
 import heroImage from '../../public/images/hero-image.png';
 
 interface HeroProps {
-  scrollToContact: React.MouseEventHandler<HTMLButtonElement>;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function Hero({ scrollToContact }: HeroProps) {
+function Hero({ handleClick }: HeroProps) {
   return (
     <>
       <Metadata />
@@ -28,7 +28,7 @@ function Hero({ scrollToContact }: HeroProps) {
             <ShowResume href="resume.pdf" target="_blank" rel="noopener noreferrer">
               Resume
             </ShowResume>
-            <ContactButton onClick={scrollToContact}>Send me a message</ContactButton>
+            <ContactButton onClick={handleClick}>Send me a message</ContactButton>
           </ButtonWrapper>
         </Introduction>
         <ImageWrapper>
@@ -122,7 +122,6 @@ const Description = styled.p`
   padding-top: 3.2rem;
   padding-bottom: 2.4rem;
   line-height: 1.4;
-  color: hsl(219, 28%, 84%);
 
   @media ${(p) => p.theme.breakpoints.med} {
     font-size: 2.4rem;

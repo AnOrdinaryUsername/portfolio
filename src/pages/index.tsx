@@ -18,7 +18,7 @@ function Home() {
   return (
     <>
       <Metadata />
-      <Hero scrollToContact={scrollToContactForm} />
+      <Hero handleClick={scrollToContactForm} />
       <AboutMe />
       <ProjectsShowcase />
       <ContactMe formRef={formRef} />
