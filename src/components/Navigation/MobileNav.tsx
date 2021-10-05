@@ -1,7 +1,7 @@
-import { Close } from 'components/Svgs/Icons';
-import dynamic from 'next/dynamic';
 import * as React from 'react';
+import { X } from 'react-feather';
 import styled, { css } from 'styled-components';
+import DarkModeButton from './DarkModeButton';
 import links from './links';
 import NavItem from './NavItem';
 
@@ -11,15 +11,13 @@ interface MobileNavProps {
   toggleMenu?: React.MouseEventHandler<HTMLButtonElement | HTMLDivElement>;
 }
 
-const DynamicDarkModeButton = dynamic(() => import('./DarkModeButton'), { ssr: false });
-
 function MobileNav({ id, isActive, toggleMenu }: MobileNavProps) {
   return (
-    <div>
+    <Wrapper>
       <Overlay onClick={toggleMenu} isActive={isActive} />
-      <Wrapper id={id} isActive={isActive}>
+      <Menu id={id} isActive={isActive}>
         <CloseMenuButton aria-label="Close menu" onClick={toggleMenu}>
-          <Close height="40" />
+          <X size="40" />
         </CloseMenuButton>
         <Nav>
           <List>
@@ -28,13 +26,21 @@ function MobileNav({ id, isActive, toggleMenu }: MobileNavProps) {
             ))}
           </List>
         </Nav>
-        <DynamicDarkModeButton />
-      </Wrapper>
-    </div>
+        <DarkModeButton />
+      </Menu>
+    </Wrapper>
   );
 }
 
-export const Wrapper = styled.div<MobileNavProps>`
+const Wrapper = styled.div`
+  display: block;
+
+  @media ${(p) => p.theme.breakpoints.med} {
+    display: none;
+  }
+`;
+
+export const Menu = styled.div<MobileNavProps>`
   position: fixed;
   top: 0;
   bottom: 0;

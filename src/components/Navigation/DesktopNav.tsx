@@ -1,9 +1,10 @@
-import { Logo, Menu } from 'components/Svgs/Icons';
+import { Logo } from 'components/Svgs/Icons';
 import VisuallyHidden from 'components/VisuallyHidden';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import * as React from 'react';
+import { Menu } from 'react-feather';
 import styled from 'styled-components';
+import DarkModeButton from './DarkModeButton';
 import links from './links';
 import NavItem from './NavItem';
 
@@ -11,17 +12,17 @@ interface DesktopNavProps {
   isExpanded: boolean;
   ariaControls: string;
   toggleMenu: React.MouseEventHandler<HTMLButtonElement>;
-  isSmallerThanDesktop: boolean;
 }
 
-const DynamicDarkModeButton = dynamic(() => import('./DarkModeButton'), { ssr: false });
-
-function DesktopNav({ isExpanded, ariaControls, toggleMenu, isSmallerThanDesktop }: DesktopNavProps) {
-  const logoHeight = isSmallerThanDesktop ? '40' : '45';
-
+function DesktopNav({ isExpanded, ariaControls, toggleMenu }: DesktopNavProps) {
   const smallNav = (
-    <OpenMenuButton onClick={toggleMenu} aria-controls={ariaControls} aria-expanded={isExpanded} aria-label="Open menu">
-      <Menu height="40" />
+    <OpenMenuButton
+      onClick={toggleMenu}
+      aria-controls={ariaControls}
+      aria-expanded={isExpanded}
+      aria-label="Open menu"
+    >
+      <Menu size="40" />
     </OpenMenuButton>
   );
 
@@ -34,11 +35,9 @@ function DesktopNav({ isExpanded, ariaControls, toggleMenu, isSmallerThanDesktop
           ))}
         </List>
       </Nav>
-      <DynamicDarkModeButton />
+      <DarkModeButton />
     </Wrapper>
   );
-
-  const nav = isSmallerThanDesktop ? smallNav : desktopNav;
 
   return (
     <HeaderWrapper>
@@ -46,10 +45,11 @@ function DesktopNav({ isExpanded, ariaControls, toggleMenu, isSmallerThanDesktop
         <Link href="/" passHref={true}>
           <LogoAnchor>
             <VisuallyHidden text="Homepage" />
-            <Logo height={logoHeight} />
+            <Logo />
           </LogoAnchor>
         </Link>
-        {nav}
+        {desktopNav}
+        {smallNav}
       </Header>
     </HeaderWrapper>
   );
@@ -77,15 +77,28 @@ const Header = styled.header`
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
+  display: none;
+
+  @media ${(p) => p.theme.breakpoints.med} {
+    display: flex;
+    align-items: center;
+
+    & > button {
+      margin-left: 3.2rem;
+    }
+  }
 `;
 
 const OpenMenuButton = styled.button`
+  display: initial;
   line-height: 0;
+
+  @media ${(p) => p.theme.breakpoints.med} {
+    display: none;
+  }
 `;
 
-const LogoAnchor = styled.a`
+export const LogoAnchor = styled.a`
   line-height: 0;
 `;
 

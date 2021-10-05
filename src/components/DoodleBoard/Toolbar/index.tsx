@@ -1,11 +1,11 @@
 import { sharedButtonStyles } from 'components/Buttons';
-import { ArrowLeft, ChevronUp, Eraser, Trash, UndoArrow } from 'components/Svgs/Icons';
-import { useKeyboardCombo, useToggle, useWindowSize } from 'hooks';
+import { Eraser } from 'components/Svgs/Icons';
+import { useKeyboardCombo, useToggle } from 'hooks';
 import * as htmlToImage from 'html-to-image';
 import * as React from 'react';
-import { Download } from 'react-feather';
+import { ChevronUp, CornerUpLeft, Download, Home, Trash2 } from 'react-feather';
 import styled, { css } from 'styled-components';
-import { BREAKPOINT_SIZES, NORD_THEME } from '../../../constants';
+import { NORD_THEME } from '../../../constants';
 import ColorBlocks from './ColorBlocks';
 import CustomColor from './CustomColor';
 import type { StrokeInputsProps } from './StrokeInputs';
@@ -13,16 +13,12 @@ import StrokeInputs from './StrokeInputs';
 
 const TRANSITION_OUT_TIME = 350; // in miliseconds
 
-interface ToolbarProps extends Omit<StrokeInputsProps, 'isToolbarActive'> {
+interface ToolbarProps extends Omit<StrokeInputsProps, 'isToolbarActive'>, MobileButtonsProps {
   isDrawing: boolean;
   divRef: React.RefObject<HTMLDivElement>;
-  currentColor: string;
   customColor: string;
-  goBack: React.MouseEventHandler<HTMLButtonElement>;
   chooseCustomColor: React.Dispatch<React.SetStateAction<string>>;
   deleteDrawing: React.MouseEventHandler<HTMLButtonElement>;
-  undoLine: React.MouseEventHandler<HTMLButtonElement>;
-  useEraser: React.MouseEventHandler<HTMLButtonElement>;
   changeStrokeColor: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -34,7 +30,6 @@ function Toolbar({
   opacity,
   strokeWidth,
   updateStrokeSettings,
-  goBack,
   chooseCustomColor,
   useEraser,
   deleteDrawing,
@@ -46,9 +41,6 @@ function Toolbar({
   const [isToolbarActive, setIsToolbarActive] = useToggle();
   const [hasTransitionedOut, setHasTransitionedOut] = React.useState<boolean>(true);
   const [colorBoxWithFocus, setColorBoxWithFocus] = React.useState<string>('#2b2b2b');
-
-  const { width } = useWindowSize();
-  const isSmallerThanDesktop = width < BREAKPOINT_SIZES.lg;
 
   const toggleToolbar = () => {
     setIsToolbarActive();
@@ -97,21 +89,11 @@ function Toolbar({
 
   return (
     <>
-      <BackButton onClick={goBack}>
-        <ArrowLeft height="20" />
-        Go Back
-      </BackButton>
-      {isSmallerThanDesktop && (
-        <>
-          <MobileIconButton align="left" onClick={useEraser} aria-label="Use eraser">
-            <Eraser height="30" />
-          </MobileIconButton>
-          <MobileIconButton align="right" onClick={undoLine} aria-label="Undo last stroke">
-            <UndoArrow height="30" />
-          </MobileIconButton>
-          <CurrentColor color={currentColor} aria-label={`Your current color is ${currentColor}`} />
-        </>
-      )}
+      <HomeAnchor href="/">
+        <Home size="20" />
+        Home
+      </HomeAnchor>
+      <MobileButtons undoLine={undoLine} useEraser={useEraser} currentColor={currentColor} />
       <Wrapper
         isToolbarActive={isToolbarActive}
         aria-controls="content"
@@ -123,7 +105,7 @@ function Toolbar({
             aria-label={isToolbarActive ? 'Hide toolbar' : 'Reveal toolbar'}
             onClick={toggleToolbar}
           >
-            <ChevronUp height="50" />
+            <ChevronUp size="50" />
           </RevealToolbarButton>
         </Flap>
         <Content id="content">
@@ -152,17 +134,15 @@ function Toolbar({
               onClick={deleteDrawing}
               aria-label="Delete entire drawing"
             >
-              <Trash height="30" />
+              <Trash2 size="30" />
             </IconButton>
-            {!isSmallerThanDesktop && (
-              <IconButton
-                tabIndex={isToolbarActive ? 0 : -1}
-                onClick={undoLine}
-                aria-label="Undo last stroke"
-              >
-                <UndoArrow height="30" />
-              </IconButton>
-            )}
+            <IconButton
+              tabIndex={isToolbarActive ? 0 : -1}
+              onClick={undoLine}
+              aria-label="Undo last stroke"
+            >
+              <CornerUpLeft size="30" />
+            </IconButton>
             <DownloadAnchor
               ref={downloadRef}
               tabIndex={isToolbarActive ? 0 : -1}
@@ -177,6 +157,32 @@ function Toolbar({
     </>
   );
 }
+
+interface MobileButtonsProps {
+  undoLine: React.MouseEventHandler<HTMLButtonElement>;
+  useEraser: React.MouseEventHandler<HTMLButtonElement>;
+  currentColor: string;
+}
+
+function MobileButtons({ useEraser, undoLine, currentColor }: MobileButtonsProps) {
+  return (
+    <Container>
+      <MobileIconButton align="left" onClick={useEraser} aria-label="Use eraser">
+        <Eraser size="30" />
+      </MobileIconButton>
+      <MobileIconButton align="right" onClick={undoLine} aria-label="Undo last stroke">
+        <CornerUpLeft size="30" />
+      </MobileIconButton>
+      <CurrentColor color={currentColor} aria-label={`Your current color is ${currentColor}`} />
+    </Container>
+  );
+}
+
+const Container = styled.div`
+  @media ${(p) => p.theme.breakpoints.lg} {
+    display: none;
+  }
+`;
 
 interface WrapperProps {
   isToolbarActive: boolean;
@@ -246,7 +252,6 @@ const Content = styled.div`
   @media ${(p) => p.theme.breakpoints.sm} {
     padding: 4.8rem;
     justify-content: space-around;
-    overflow-x: initial;
   }
 
   @media ${(p) => p.theme.breakpoints.lg} {
@@ -270,13 +275,13 @@ const ButtonsWrapper = styled.div`
   }
 `;
 
-const BackButton = styled.button`
+const HomeAnchor = styled.a`
   ${sharedButtonStyles}
   position: absolute;
   top: 0;
   left: 0;
   z-index: 11;
-  padding: 1rem 1.6rem;
+  padding: 1.2rem 2.2rem;
   margin: 2.4rem;
   user-select: none;
   color: ${NORD_THEME.nord3};
@@ -284,17 +289,21 @@ const BackButton = styled.button`
   border-radius: 75px;
 
   & > *:first-child {
-    align-self: flex-end;
     margin-right: 0.6rem;
   }
 `;
 
 const IconButton = styled.button`
   ${sharedButtonStyles}
+  display: none;
   width: 6rem;
   height: 6rem;
   color: ${NORD_THEME.nord3};
   background-color: hsl(225, 22%, 81%);
+
+  @media ${(p) => p.theme.breakpoints.lg} {
+    display: inline;
+  }
 `;
 
 const DownloadAnchor = styled.a`
@@ -311,6 +320,7 @@ interface MobileIconButtonProps {
 }
 
 const MobileIconButton = styled(IconButton)<MobileIconButtonProps>`
+  display: inline-flex; /* NOTE: This just overrides the display: none inherited from IconButton */
   position: absolute;
   bottom: 0;
   z-index: 11;

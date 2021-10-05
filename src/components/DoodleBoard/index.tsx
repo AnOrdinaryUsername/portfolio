@@ -1,5 +1,4 @@
 import { useKeyboardCombo, useToggle } from 'hooks';
-import { useRouter } from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
 import { DeleteDialog } from './Dialog';
@@ -40,9 +39,6 @@ function DoodleBoard() {
   const [customColor, setCustomColor] = React.useState<string>('#2b2b2b');
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useToggle();
-  const router = useRouter();
-
-  const goBackToPreviousPage = () => router.back();
 
   const grabCoordinates = (event: DrawEvent) => {
     if (boardRef.current) {
@@ -217,7 +213,6 @@ function DoodleBoard() {
         customColor={customColor}
         updateStrokeSettings={updateStrokeSettings}
         chooseCustomColor={(event) => setCustomColor(event)}
-        goBack={goBackToPreviousPage}
         useEraser={useEraser}
         deleteDrawing={setIsDeleteDialogOpen}
         undoLine={undoLine}

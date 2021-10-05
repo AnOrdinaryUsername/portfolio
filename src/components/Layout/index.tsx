@@ -1,10 +1,9 @@
 import Footer from 'components/Footer';
 import DesktopNav from 'components/Navigation/DesktopNav';
 import MobileNav from 'components/Navigation/MobileNav';
-import { useToggle, useWindowSize } from 'hooks';
+import { useToggle } from 'hooks';
 import * as React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import { BREAKPOINT_SIZES } from '../../constants';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -12,9 +11,7 @@ interface MainLayoutProps {
 
 function MainLayout({ children }: MainLayoutProps) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useToggle();
-  const { width } = useWindowSize();
-  const isSmallerThanDesktop = width < BREAKPOINT_SIZES.med;
-  const id = "navigation";
+  const id = 'navigation';
 
   React.useEffect(() => {
     if (isMobileNavOpen) {
@@ -25,12 +22,10 @@ function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
       <GlobalStyle isMobileNavOpen={isMobileNavOpen} />
-      <DesktopNav ariaControls={id} isExpanded={isMobileNavOpen} toggleMenu={setIsMobileNavOpen} isSmallerThanDesktop={isSmallerThanDesktop} />
+      <DesktopNav ariaControls={id} isExpanded={isMobileNavOpen} toggleMenu={setIsMobileNavOpen} />
       <Layout>{children}</Layout>
       <Footer />
-      {isSmallerThanDesktop && (
-        <MobileNav id={id} toggleMenu={setIsMobileNavOpen} isActive={isMobileNavOpen} />
-      )}
+      <MobileNav id={id} toggleMenu={setIsMobileNavOpen} isActive={isMobileNavOpen} />
     </>
   );
 }
