@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { ExternalLink, GithubLogo } from 'components/Svgs/Icons';
+import { GithubLogo } from 'components/Svgs/Icons';
 import { useWindowSize } from 'hooks';
 import type { ImageProps } from 'next/image';
 import Image from 'next/image';
+import { ExternalLink } from 'react-feather';
 import styled, { css } from 'styled-components';
 import { BREAKPOINT_SIZES, NORD_THEME } from '../../constants';
 
@@ -59,11 +60,11 @@ function ProjectCard({
             {!isMobilePhone ? (
               <>
                 <Anchor href={repoLink} target="_blank" rel="noopener noreferrer">
-                  <GithubLogo fillColor="#181616" height="25" />
+                  <GithubLogo size="25" />
                   Repository
                 </Anchor>
                 <Anchor href={websiteLink} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink height="25" />
+                  <ExternalLink size="25" />
                   Website
                 </Anchor>
               </>
@@ -75,7 +76,7 @@ function ProjectCard({
                   rel="noopener noreferrer"
                   aria-label={`View the source for ${name}`}
                 >
-                  <GithubLogo fillColor="#181616" height="30" />
+                  <GithubLogo size="30" />
                 </MobileAnchor>
                 <MobileAnchor
                   href={websiteLink}
@@ -83,7 +84,7 @@ function ProjectCard({
                   rel="noopener noreferrer"
                   aria-label={`View the website for ${name}`}
                 >
-                  <ExternalLink height="30" />
+                  <ExternalLink size="30" />
                 </MobileAnchor>
               </>
             )}
@@ -151,14 +152,16 @@ const Placard = styled.div<Reverse>`
 const PlacardDetails = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 30rem;
+  min-height: 25rem;
   padding: 2.4rem;
 
   @media ${(p) => p.theme.breakpoints.sm} {
+    min-height: 32.5rem;
     padding: 3.6rem;
   }
 
   @media ${(p) => p.theme.breakpoints.med} {
+    min-height: 35rem;
     padding: 4.8rem;
   }
 `;
@@ -190,7 +193,6 @@ const Anchor = styled.a`
   align-items: center;
   justify-content: center;
   padding: 1.2rem;
-  background: lightgray;
   color: ${NORD_THEME.nord3};
   border-radius: 4px;
   background: hsl(225, 22%, 91%);
@@ -201,6 +203,7 @@ const Anchor = styled.a`
   &:hover {
     transition: background 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: hsl(225, 22%, 87%);
+    color: #2b2b2b;
   }
 
   & > *:nth-child(1) {
