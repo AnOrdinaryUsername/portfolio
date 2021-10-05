@@ -60,7 +60,7 @@ class MyDocument extends Document {
 function setColorsByTheme() {
   const colors = '🌈';
   let colorMode: string;
-  const hasColorModePreference = window.localStorage.getItem('color-mode') ?? 'dark';
+  const hasColorModePreference = window.localStorage.getItem('color-mode');
 
   if (hasColorModePreference) {
     colorMode = hasColorModePreference;
