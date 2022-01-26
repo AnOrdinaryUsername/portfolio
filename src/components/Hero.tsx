@@ -1,5 +1,4 @@
 import { primaryButtonStyles, sharedButtonStyles, tertiaryButtonStyles } from 'components/Buttons';
-import Metadata from 'components/Metadata';
 import { HollowDots } from 'components/Svgs/Background';
 import Image from 'next/image';
 import * as React from 'react';
@@ -13,7 +12,6 @@ interface HeroProps {
 function Hero({ handleClick }: HeroProps) {
   return (
     <>
-      <Metadata />
       <Header>
         <Introduction>
           <BackgroundDots />
@@ -63,6 +61,7 @@ const Header = styled.header`
   @media ${(p) => p.theme.breakpoints.lg} {
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
   }
 `;
 
@@ -75,7 +74,6 @@ const Introduction = styled.div`
 
   @media ${(p) => p.theme.breakpoints.lg} {
     padding-bottom: 0;
-    padding-right: 3.2rem;
     max-width: 40rem;
     width: 100%;
   }

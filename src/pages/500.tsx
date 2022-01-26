@@ -1,13 +1,18 @@
 import MainLayout from 'components/Layout';
+import type { HeadContent } from 'components/Metadata';
 import Metadata from 'components/Metadata';
 import styled from 'styled-components';
 
 ServerError.layout = MainLayout;
 
 function ServerError() {
+  const head: HeadContent = {
+    title: '500 | Server Error',
+  };
+
   return (
     <>
-      <Metadata title="500 | Server Error" />
+      <Metadata meta={head} />
       <Header>
         <StatusCode>
           <Number>500</Number> | <Message>Server Error</Message>

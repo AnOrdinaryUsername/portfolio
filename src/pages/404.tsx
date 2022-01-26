@@ -1,4 +1,5 @@
 import MainLayout from 'components/Layout';
+import type { HeadContent } from 'components/Metadata';
 import Metadata from 'components/Metadata';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -8,9 +9,13 @@ NotFound.layout = MainLayout;
 function NotFound() {
   const pagePath = useRouter().asPath;
 
+  const head: HeadContent = {
+    title: '404 | Not Found',
+  };
+
   return (
     <>
-      <Metadata title="404 | Not Found" />
+      <Metadata meta={head} />
       <Header>
         <StatusCode>
           <Number>404</Number> | <Message>Not Found</Message>

@@ -1,6 +1,8 @@
 import { PrimaryButton, SecondaryButton } from 'components/Buttons';
 import { Dialog, DialogContent, DialogOptions, DialogText, DialogTitle } from 'components/Dialog';
 import DoodleBoard from 'components/DoodleBoard';
+import type { HeadContent } from 'components/Metadata';
+import Metadata from 'components/Metadata';
 import { useToggle } from 'hooks';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -12,6 +14,17 @@ function Doodle() {
   const [isDialogOpen, setIsDialogOpen] = useToggle(true);
 
   const goBackToPreviousPage = () => router.back();
+
+  const head: HeadContent = {
+    title: 'Doodle Time!',
+    description: "It's time to d-d-d-d-doodle",
+    image: {
+      alt: 'Digital drawing banner showing page title',
+      path: '/images/doodle-banner.png',
+      width: '1268',
+      height: '942',
+    },
+  };
 
   React.useEffect(() => {
     const checkTheme = () => {
@@ -34,6 +47,7 @@ function Doodle() {
   return (
     <>
       <GlobalStyles />
+      <Metadata meta={head} />
       <Main>
         <DoodleBoard />
         {hasWarning && (
